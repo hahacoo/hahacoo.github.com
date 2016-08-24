@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="baidu-site-verification" content="9SA7MeFJuT" />
+    
+
+    <title>
+      Yeoman工作流模式 | 全面回忆 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="zhangdi(hahacoo)">
+    
+    
+
+    <meta name="description" content="Yoman工作流模式最近在做项目重构，于是尝试使用Yeoman完成项目的基础结构和代码的重构。Yeoman的出现确实解决了不少开发流程中的问题，让人更加专注于逻辑代码的部分。
+Yeoman是一种工作流模式，它本身不是一种工具。它的目标是通过yo（脚手架工具）、bower（包管理工具）和grunt（自动化构建工具）的合作提高我们的的工作效率。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Yeoman工作流模式 | 全面回忆">
+<meta property="og:url" content="http://zhangdiweb.com/2016/08/24/Yeoman工作流模式/index.html">
+<meta property="og:site_name" content="全面回忆">
+<meta property="og:description" content="Yoman工作流模式最近在做项目重构，于是尝试使用Yeoman完成项目的基础结构和代码的重构。Yeoman的出现确实解决了不少开发流程中的问题，让人更加专注于逻辑代码的部分。
+Yeoman是一种工作流模式，它本身不是一种工具。它的目标是通过yo（脚手架工具）、bower（包管理工具）和grunt（自动化构建工具）的合作提高我们的的工作效率。">
+<meta property="og:updated_time" content="2016-08-24T09:35:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Yeoman工作流模式 | 全面回忆">
+<meta name="twitter:description" content="Yoman工作流模式最近在做项目重构，于是尝试使用Yeoman完成项目的基础结构和代码的重构。Yeoman的出现确实解决了不少开发流程中的问题，让人更加专注于逻辑代码的部分。
+Yeoman是一种工作流模式，它本身不是一种工具。它的目标是通过yo（脚手架工具）、bower（包管理工具）和grunt（自动化构建工具）的合作提高我们的的工作效率。">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">全面回忆</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          张棣
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/hahacoo" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">Yeoman工作流模式</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-08-24" class="post-meta__date date">2016-08-24</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/工程化/">工程化</a>
+            </font>
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/nodejs/">nodejs</a>, <a class="tags-link" href="/tags/yeoman/">yeoman</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h2 id="Yoman工作流模式"><a href="#Yoman工作流模式" class="headerlink" title="Yoman工作流模式"></a>Yoman工作流模式</h2><p>最近在做项目重构，于是尝试使用Yeoman完成项目的基础结构和代码的重构。Yeoman的出现确实解决了不少开发流程中的问题，让人更加专注于逻辑代码的部分。</p>
+<p>Yeoman是一种工作流模式，它本身不是一种工具。它的目标是通过yo（脚手架工具）、bower（包管理工具）和grunt（自动化构建工具）的合作提高我们的的工作效率。</p>
+<a id="more"></a>
+<p>这里我只对yo进行简单的介绍。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm install -g yo</div><div class="line">npm install -g generator-name</div></pre></td></tr></table></figure>
+<p>到此，指定工具安装完成，通过<code>yo name</code>就可以生成相应的代码结构。</p>
+<p>yo的运行离不开各种generator，generator定义了脚手架该如何生成，官网上有很多生成器，当然也可以自己写一个生成器。由于是对项目重构，按照实际需求，我自己写了一个生成器。</p>
+<p>下面逐步介绍一下自定义generator的过程：</p>
+<h3 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h3><p>一个generator就是是nodejs模块。新建文件夹，按照Yeoman的要求，新建的文件夹名称必须为<code>generator-*</code>，我的命名为<code>generator-mygen</code>。</p>
+<p>进入<code>generator-mygen</code>，执行<code>npm init</code>生成<code>package.json</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;name&quot;: &quot;generator-mygen&quot;,</div><div class="line">  &quot;version&quot;: &quot;0.1.0&quot;,</div><div class="line">  &quot;description&quot;: &quot;&quot;,</div><div class="line">  &quot;files&quot;: [</div><div class="line">    &quot;app&quot;,</div><div class="line">    &quot;part&quot;</div><div class="line">  ],</div><div class="line">  &quot;keywords&quot;: [&quot;yeoman-generator&quot;],</div><div class="line">  &quot;dependencies&quot;: &#123;</div><div class="line">    &quot;yeoman-generator&quot;: &quot;^0.24.1&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>name</code>必须以<code>generator-</code>开头，<code>keywords</code>必须包含<code>&quot;yeoman-generator&quot;</code>，还要求添加最新版的<code>yeoman-generator</code>依赖，可通过执行<code>npm instakk yeoman-generator --save</code>安装。都是Yeoman的要求，我们照做就行了。</p>
+<pre><code>├───package.json
+├───app/
+│   └───index.js
+└───part/
+    └───index.js
+</code></pre><p>执行<code>yo mygen</code>命令，调用的就是<code>app\index</code>，所以一个生成器必须包含<code>app</code>文件夹。如果执行子命令，如<code>yo mygen:part</code>，那么调用的就是<code>part\index</code>。</p>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><p>自定义生成器的关键就是理解generator执行的生命周期。Yeoman提供了基础生成器供我们扩展使用，在这里我们可以对构造函数和各个生命周期进行扩展。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var generators = require(&apos;yeoman-generator&apos;);</div><div class="line">module.exports = generators.Base.extend();</div></pre></td></tr></table></figure>
+<p>下面是生命周期执行的顺序：</p>
+<ol>
+<li><strong>initializing</strong> - 处理用户指定的<code>options</code>或者<code>arguments</code>阶段。</li>
+<li><strong>prompting</strong> - 和用户交互阶段，内部实现使用了<code>Inquirer.js</code>。</li>
+<li><strong>configuring</strong> - 保存配置文件阶段。</li>
+<li><strong>default</strong> - 非其他生命周期内的自定义方法执行阶段。</li>
+<li><strong>writing</strong> - 模板文件处理阶段。</li>
+<li><strong>conflicts</strong> - 处理文件冲突阶段。</li>
+<li><strong>install</strong> - 安装bower和npm依赖阶段。</li>
+<li><strong>end</strong> - 执行结束</li>
+</ol>
+<p>*<em>注意</em>，这里给出的只是generator内部的执行顺序，每个周期里执行什么方法是由我们决定的，但最好按照这个顺序执行，避免出现奇怪的错误。</p>
+<h3 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h3><p>生成器另外一个特别的地方就是各生成器之间的组合调用，一方面可以直接调用别人写好的代码，也可以将我们的处理逻辑拆分，更加方便管理。</p>
+<pre><code>default: function () {  
+  this.composeWith(&apos;mygen:part&apos;, {
+    options: {}
+  }, {
+    local: require.resolve(&apos;../part&apos;)
+  })
+  this.composeWith(&apos;backbone:route&apos;, {
+  }, {
+    local: require.resolve(&apos;generator-bootstrap&apos;)
+  });
+}
+</code></pre><p>*<em>注意</em>，按照生命周期执行顺序，组合进来的生成器会按添加顺序依次执行各个生命周期的方法。</p>
+<h3 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h3><p>在项目中执行<code>npm link</code>，这样就可以通过<code>yo mygen</code>调用生成器了。这样我们的开发流程就变为先通过Yeoman生成基础结构和代码，再上传到gitLab上管理，供大家使用。但是我更希望的是通过Yeoman，大家之后的app创建，组件的生成这类基础代码都可以直接通过命令实现，由于Yeoman基于nodeJs，通过npm管理，内部项目代码不允许公开<br>，于是搭建了npm私服，这样问题就解决了，至此整个过程就完成了。</p>
+
+  </section>
+
+  
+  
+
+<section class="post-comments">
+
+    <div class="ds-thread" data-thread-key="2016/08/24/Yeoman工作流模式/"></div>
+
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"zhangcom"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script> 
+
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
