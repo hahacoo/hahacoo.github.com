@@ -25,9 +25,9 @@ $(document).ready(function() {
     $('.btn-mobile-menu__icon').toggleClass('icon-list icon-x-circle animated fadeIn');
   });
 
-  if ($('.panel-cover').hasClass('panel-cover--collapsed')) {
-    $('.panel-cover').addClass('animated panel-cover--collapsed slideInLeft');
-    $('.content-wrapper').addClass('animated slideInLeft');
-  }
+  // if ($('.panel-cover').hasClass('panel-cover--collapsed')) {
+  //   $('.panel-cover').addClass('animated panel-cover--collapsed slideInLeft');
+  //   $('.content-wrapper').addClass('animated slideInLeft');
+  // }
 
 });
