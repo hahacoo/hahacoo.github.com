@@ -7,7 +7,7 @@
     
 
     <title>
-      归档 
+      JavaScript中对象的属性 | 全面回忆 
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -16,16 +16,16 @@
     
     
 
-    <meta name="description" content="技术分享、作品展示、知识积累">
-<meta property="og:type" content="website">
-<meta property="og:title" content="归档">
-<meta property="og:url" content="http://zhangdiweb.com/archive/index.html">
+    <meta name="description" content="javascript中继承是通过原型实现的，对象的属性可以分为、自有属性和继承属性，属性的访问那就需要我们来了解一下了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript中对象的属性 | 全面回忆">
+<meta property="og:url" content="http://zhangdiweb.com/2016/08/29/JavaScript中对象的属性/index.html">
 <meta property="og:site_name" content="全面回忆">
-<meta property="og:description" content="技术分享、作品展示、知识积累">
-<meta property="og:updated_time" content="2016-08-14T11:55:49.000Z">
+<meta property="og:description" content="javascript中继承是通过原型实现的，对象的属性可以分为、自有属性和继承属性，属性的访问那就需要我们来了解一下了。">
+<meta property="og:updated_time" content="2016-08-29T06:05:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="归档">
-<meta name="twitter:description" content="技术分享、作品展示、知识积累">
+<meta name="twitter:title" content="JavaScript中对象的属性 | 全面回忆">
+<meta name="twitter:description" content="javascript中继承是通过原型实现的，对象的属性可以分为、自有属性和继承属性，属性的访问那就需要我们来了解一下了。">
     
     
     
@@ -190,66 +190,81 @@ classes that you can use:
 
   <header class="post-header">
     
-    <h1 class="post-title">归档</h1>
+    <h1 class="post-title">JavaScript中对象的属性</h1>
 
-    <section id="post-content" class="article-content post">
-        
-    </section>
+    
 
+    <div class="post-meta">
+      <time datetime="2016-08-29" class="post-meta__date date">2016-08-29</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
 
   </header>
 
+  <section id="post-content" class="article-content post">
+    <p>javascript中继承是通过原型实现的，对象的属性可以分为、<strong>自有属性</strong>和<strong>继承属性</strong>，属性的访问那就需要我们来了解一下了。<br><a id="more"></a></p>
+<h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><p>访问obj.x，属性访问规则是：</p>
+<ol>
+<li>查找obj是否有x属性。</li>
+<li>若没有，继续在obj的原型中继续查找x。</li>
+<li>以此向上查询，知道找到x或者找到一个原型是null的对象为止。</li>
+<li>都未找到则返回undefined</li>
+</ol>
+<h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><p>例如obj.x = ‘haha’，赋值规则是：</p>
+<ol>
+<li>obj中已有属性x，直接修改x的值。</li>
+<li>如果obj中的属性x，继承自原型，那么在obj创建同名属性覆盖原型，但<em>不会修改原型</em>。</li>
+<li>不是前面的情况，则给obj添加一个新属性x。</li>
+</ol>
+<blockquote>
+<p>javascript中，只有在查询属性时才会体会到继承的存在，而设置属性则和继承无关，让程序员可以有选择地覆盖继承的属性。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var parent = function() &#123;&#125;</div><div class="line">parent.prototype.a = &#123;&#125;</div><div class="line"></div><div class="line">var c = new parent()</div><div class="line">c.a.b = 1</div></pre></td></tr></table></figure>
+<p>上面的情况会修改原型上的a的值，由于上述操作实际完成了两步，先访问了原型上的a属性，然后进行操作，修改了原型上的值。</p>
+<h3 id="属性检测"><a href="#属性检测" class="headerlink" title="属性检测"></a>属性检测</h3><p>三种方式可以使用：</p>
+<ol>
+<li><code>key in obj</code>: 判断范围包括自有属性或继承属性，忽略判断是否可枚举</li>
+<li><code>hasOwnProperty()</code>: 判断范围只有自有属性，忽略是否可枚举</li>
+<li><code>propertyIsEnumerable()</code>: 判断范围自有属性，必须满足可枚举</li>
+</ol>
+<p>属性遍历可以通过<code>for/in</code>，遍历所有可枚举的属性（自有属性和继承属性）；<code>Object.keys()</code>，返回可枚举的自有属性；<code>Object.getOwnPropertyNames()</code>，返回全部自有属性。</p>
+
+  </section>
+
+  
+  
+
+<section class="post-comments">
+
+    <div class="ds-thread" data-thread-key="2016/08/29/JavaScript中对象的属性/"></div>
+
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"zhangcom"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script> 
+
+</section>
+
+
 </article>
 
-<div class="archive-meta">
 
-
-    <h3>分类</h3>
-
-    <div class="categorieslist">
-        
-          
-            <span><a href="/categories/Nodejs/" title="Nodejs">Nodejs<sup>2</sup></a></span>
-          
-        
-          
-            <span><a href="/categories/可视化/" title="可视化">可视化<sup>1</sup></a></span>
-          
-        
-          
-            <span><a href="/categories/工程化/" title="工程化">工程化<sup>1</sup></a></span>
-          
-        
-     </div>
-
-
-
-    <h3>标签</h3>
-    <div class="tagslist">
-        
-            
-                <span><a href="/tags/D3/" title="D3">D3<sup>1</sup></a></span>
-            
-        
-            
-                <span><a href="/tags/blog/" title="blog">blog<sup>1</sup></a></span>
-            
-        
-            
-                <span><a href="/tags/yeoman/" title="yeoman">yeoman<sup>1</sup></a></span>
-            
-        
-    </div>
-
-
-
-    <h3>归档</h3>
-    <div class="archiveslist">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">6</span></li></ul>
-    </div>
-
-
-</div>
             <footer class="footer">
 
     <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
@@ -266,6 +281,18 @@ classes that you can use:
 
     
     
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
     
     
     <!--kill ie6 -->
