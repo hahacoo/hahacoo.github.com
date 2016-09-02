@@ -7,7 +7,7 @@
     
 
     <title>
-      Nodejs中的文件路径问题 | 全面回忆 
+      express中间件和路由 | 全面回忆 
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -16,16 +16,37 @@
     
     
 
-    <meta name="description" content="自己在模块里通过相对路径获取文件的时候发现了问题，于是决定了解一下Nodejs中文件路径的问题。">
+    <meta name="description" content="Express是基于Nodejs的Web应用程序框架。我的理解，在做express开发关键处理好两件事中间件和路由。
+最近的项目开发希望使用Nodejs为前端开发提供一个简单的本地服务器环境，于是用Express简单搭建了一套，以下是自己的一些理解：
+###中间件###
+中间件按类型可以分为：
+
+应用层中间件 eg. app.use()
+路由器中间件 eg. router.use()
+内置中间件">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nodejs中的文件路径问题 | 全面回忆">
-<meta property="og:url" content="http://zhangdiweb.com/2016/08/26/Nodejs中的文件路径问题/index.html">
+<meta property="og:title" content="express中间件和路由 | 全面回忆">
+<meta property="og:url" content="http://zhangdiweb.com/2016/09/02/express中间件和路由/index.html">
 <meta property="og:site_name" content="全面回忆">
-<meta property="og:description" content="自己在模块里通过相对路径获取文件的时候发现了问题，于是决定了解一下Nodejs中文件路径的问题。">
-<meta property="og:updated_time" content="2016-09-02T06:28:20.000Z">
+<meta property="og:description" content="Express是基于Nodejs的Web应用程序框架。我的理解，在做express开发关键处理好两件事中间件和路由。
+最近的项目开发希望使用Nodejs为前端开发提供一个简单的本地服务器环境，于是用Express简单搭建了一套，以下是自己的一些理解：
+###中间件###
+中间件按类型可以分为：
+
+应用层中间件 eg. app.use()
+路由器中间件 eg. router.use()
+内置中间件">
+<meta property="og:updated_time" content="2016-09-02T07:23:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nodejs中的文件路径问题 | 全面回忆">
-<meta name="twitter:description" content="自己在模块里通过相对路径获取文件的时候发现了问题，于是决定了解一下Nodejs中文件路径的问题。">
+<meta name="twitter:title" content="express中间件和路由 | 全面回忆">
+<meta name="twitter:description" content="Express是基于Nodejs的Web应用程序框架。我的理解，在做express开发关键处理好两件事中间件和路由。
+最近的项目开发希望使用Nodejs为前端开发提供一个简单的本地服务器环境，于是用Express简单搭建了一套，以下是自己的一些理解：
+###中间件###
+中间件按类型可以分为：
+
+应用层中间件 eg. app.use()
+路由器中间件 eg. router.use()
+内置中间件">
     
     
     
@@ -190,12 +211,12 @@ classes that you can use:
 
   <header class="post-header">
     
-    <h1 class="post-title">Nodejs中的文件路径问题</h1>
+    <h1 class="post-title">express中间件和路由</h1>
 
     
 
     <div class="post-meta">
-      <time datetime="2016-08-26" class="post-meta__date date">2016-08-26</time> 
+      <time datetime="2016-09-02" class="post-meta__date date">2016-09-02</time> 
 
       <span class="post-meta__tags tags">
 
@@ -216,19 +237,28 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <p>自己在模块里通过相对路径获取文件的时候发现了问题，于是决定了解一下Nodejs中文件路径的问题。</p>
-<a id="more"></a>
-<p>在入口文件app.js中我有如下这么一段代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fs.readFileSync(&apos;./_config.yml&apos;, &apos;utf8&apos;)</div></pre></td></tr></table></figure>
-<p>我的目的是想获取当前目录下的配置文件，正常执行没问题</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node app.js</div></pre></td></tr></table></figure>
-<p>但当我的执行环境变了的情况下，问题就出来了，执行下面的命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node ./myapp/app.js</div></pre></td></tr></table></figure>
-<p>文件找不到了！</p>
-<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>Nodejs中有两个全局变量<strong>__dirname</strong>和<strong>__filename</strong>，这两个分别指向<strong>当前文件所在文件夹的绝对路径</strong>以及<strong>当前文件的的绝对路径</strong>。</p>
-<p>当我们使用相对路径操作文件的时候，这时他总是和node执行命令的位置有关的，是相对于你<strong>命令执行的位置</strong>来说的。所以上面当我执行命令的位置发生变化时，代码就出错了。解决的办法就是涉及到文件操作的时候要使用<strong>绝对路径</strong>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">path.resolve(__dirname, target)</div></pre></td></tr></table></figure>
-<p>但是在require()中的使用还是正常使用，因为Nodejs模块加载实现了相对路径到绝对路径的转换，可以看我之前的一篇文章<a href="http://zhangdiweb.com/2016/08/25/Nodejs%E6%A8%A1%E5%9D%97%E5%8A%A0%E8%BD%BD/">Nodejs模块加载</a></p>
+    <p>Express是基于Nodejs的Web应用程序框架。我的理解，在做express开发关键处理好两件事<strong>中间件</strong>和<strong>路由</strong>。</p>
+<p>最近的项目开发希望使用Nodejs为前端开发提供一个简单的本地服务器环境，于是用Express简单搭建了一套，以下是自己的一些理解：</p>
+<p>###中间件###</p>
+<p>中间件按类型可以分为：</p>
+<ul>
+<li>应用层中间件 eg. app.use()</li>
+<li>路由器中间件 eg. router.use()</li>
+<li>内置中间件 eg. express.static()</li>
+</ul>
+<p>中间件的<strong>安装</strong>有两种情况，</p>
+<ol>
+<li>全局</li>
+<li>指定路径</li>
+</ol>
+<p>以应用层中间件为例<code>app.use(callback)</code>为全局中间件，<code>app.use(path, callback)</code>为指定在path上安装中间件。<strong>全局中间件</strong>在每次收到请求时都会执行该函数，<strong>指定路径中间件</strong>只有在满足路径的情况下才执行。</p>
+<p>中间件的装入顺序很重要，会按装载顺序依次执行，各中间件之间通过<code>next()</code>方法链接，如果中间阻断，后面的中间件也不会执行。</p>
+<p>路由中间件和应用中间件功能一样，不同的它是绑定到express.Router()对象，使用时也需要像其他中间件一样通过app.use()进行安装</p>
+<p>###路由###</p>
+<p>路由的功能就是对指定请求进行正确的相应。用法<code>app.get(path, callback)</code>或者<code>app.route(path, callback)</code>。get方法是表明针对get请求，相应其他请求方法都有对应的方法。Express中有router对象，所以更推荐使用router进行模块开发，用法和上述的一样。</p>
+<p>路由的配置从形式上和中间件相似，用法基本一样，不再描述。</p>
+<p>不论中间件还是路由，回调函数均可以是一个函数栈，并匹配成功之后顺序执行。不同的是在路由中间件中可以通过<code>next(&#39;router&#39;)</code>跳出函数栈，到下一个中间件执行。</p>
+<p>了解了这两部分内容，就可以用express搭建web服务器了，更多细节的内容请移步<a href="https://expressjs.com" target="_blank" rel="external">express官网</a>。</p>
 
   </section>
 
@@ -237,7 +267,7 @@ classes that you can use:
 
 <section class="post-comments">
 
-    <div class="ds-thread" data-thread-key="2016/08/26/Nodejs中的文件路径问题/"></div>
+    <div class="ds-thread" data-thread-key="2016/09/02/express中间件和路由/"></div>
 
     <script type="text/javascript">
       var duoshuoQuery = {short_name:"zhangcom"};
