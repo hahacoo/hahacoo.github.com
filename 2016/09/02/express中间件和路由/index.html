@@ -17,36 +17,18 @@
     
 
     <meta name="description" content="Express是基于Nodejs的Web应用程序框架。我的理解，在做express开发关键处理好两件事中间件和路由。
-最近的项目开发希望使用Nodejs为前端开发提供一个简单的本地服务器环境，于是用Express简单搭建了一套，以下是自己的一些理解：
-###中间件###
-中间件按类型可以分为：
-
-应用层中间件 eg. app.use()
-路由器中间件 eg. router.use()
-内置中间件">
+最近的项目开发希望使用Nodejs为前端开发提供一个简单的本地服务器环境，于是用Express简单搭建了一套，以下是自己的一些理解：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="express中间件和路由 | 全面回忆">
 <meta property="og:url" content="http://zhangdiweb.com/2016/09/02/express中间件和路由/index.html">
 <meta property="og:site_name" content="全面回忆">
 <meta property="og:description" content="Express是基于Nodejs的Web应用程序框架。我的理解，在做express开发关键处理好两件事中间件和路由。
-最近的项目开发希望使用Nodejs为前端开发提供一个简单的本地服务器环境，于是用Express简单搭建了一套，以下是自己的一些理解：
-###中间件###
-中间件按类型可以分为：
-
-应用层中间件 eg. app.use()
-路由器中间件 eg. router.use()
-内置中间件">
-<meta property="og:updated_time" content="2016-09-02T07:23:46.000Z">
+最近的项目开发希望使用Nodejs为前端开发提供一个简单的本地服务器环境，于是用Express简单搭建了一套，以下是自己的一些理解：">
+<meta property="og:updated_time" content="2016-09-02T07:27:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="express中间件和路由 | 全面回忆">
 <meta name="twitter:description" content="Express是基于Nodejs的Web应用程序框架。我的理解，在做express开发关键处理好两件事中间件和路由。
-最近的项目开发希望使用Nodejs为前端开发提供一个简单的本地服务器环境，于是用Express简单搭建了一套，以下是自己的一些理解：
-###中间件###
-中间件按类型可以分为：
-
-应用层中间件 eg. app.use()
-路由器中间件 eg. router.use()
-内置中间件">
+最近的项目开发希望使用Nodejs为前端开发提供一个简单的本地服务器环境，于是用Express简单搭建了一套，以下是自己的一些理解：">
     
     
     
@@ -238,9 +220,8 @@ classes that you can use:
 
   <section id="post-content" class="article-content post">
     <p>Express是基于Nodejs的Web应用程序框架。我的理解，在做express开发关键处理好两件事<strong>中间件</strong>和<strong>路由</strong>。</p>
-<p>最近的项目开发希望使用Nodejs为前端开发提供一个简单的本地服务器环境，于是用Express简单搭建了一套，以下是自己的一些理解：</p>
-<p>###中间件###</p>
-<p>中间件按类型可以分为：</p>
+<p>最近的项目开发希望使用Nodejs为前端开发提供一个简单的本地服务器环境，于是用Express简单搭建了一套，以下是自己的一些理解：<br><a id="more"></a></p>
+<h3 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h3><p>中间件按类型可以分为：</p>
 <ul>
 <li>应用层中间件 eg. app.use()</li>
 <li>路由器中间件 eg. router.use()</li>
@@ -254,8 +235,7 @@ classes that you can use:
 <p>以应用层中间件为例<code>app.use(callback)</code>为全局中间件，<code>app.use(path, callback)</code>为指定在path上安装中间件。<strong>全局中间件</strong>在每次收到请求时都会执行该函数，<strong>指定路径中间件</strong>只有在满足路径的情况下才执行。</p>
 <p>中间件的装入顺序很重要，会按装载顺序依次执行，各中间件之间通过<code>next()</code>方法链接，如果中间阻断，后面的中间件也不会执行。</p>
 <p>路由中间件和应用中间件功能一样，不同的它是绑定到express.Router()对象，使用时也需要像其他中间件一样通过app.use()进行安装</p>
-<p>###路由###</p>
-<p>路由的功能就是对指定请求进行正确的相应。用法<code>app.get(path, callback)</code>或者<code>app.route(path, callback)</code>。get方法是表明针对get请求，相应其他请求方法都有对应的方法。Express中有router对象，所以更推荐使用router进行模块开发，用法和上述的一样。</p>
+<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><p>路由的功能就是对指定请求进行正确的相应。用法<code>app.get(path, callback)</code>或者<code>app.route(path, callback)</code>。get方法是表明针对get请求，相应其他请求方法都有对应的方法。Express中有router对象，所以更推荐使用router进行模块开发，用法和上述的一样。</p>
 <p>路由的配置从形式上和中间件相似，用法基本一样，不再描述。</p>
 <p>不论中间件还是路由，回调函数均可以是一个函数栈，并匹配成功之后顺序执行。不同的是在路由中间件中可以通过<code>next(&#39;router&#39;)</code>跳出函数栈，到下一个中间件执行。</p>
 <p>了解了这两部分内容，就可以用express搭建web服务器了，更多细节的内容请移步<a href="https://expressjs.com" target="_blank" rel="external">express官网</a>。</p>
