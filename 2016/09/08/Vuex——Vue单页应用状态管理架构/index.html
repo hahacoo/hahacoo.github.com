@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="baidu-site-verification" content="9SA7MeFJuT" />
+    
+
+    <title>
+      Vuex——Vue单页应用状态管理架构 | 全面回忆 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="zhangdi(hahacoo)">
+    
+    
+
+    <meta name="description" content="Vue.js提供了很好的数据响应机制，让我们能够轻松实现数据变化到视图的更新映射。Vuex是在Flux的设计思想基础上产生的，官网对其解释为状态管理，个人觉得好理解一些就是数据管理。
+在做Vue开发，组件之间的数据传递大致可以分为两种，父子关系明确和相互独立的。如果有明确的父子关系，那么通过Vue的事件系统就可以实现。但是对于相互对立的组件，Vue没有可行的解决方案，之前的解决方案是在根组件创建一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vuex——Vue单页应用状态管理架构 | 全面回忆">
+<meta property="og:url" content="http://zhangdiweb.com/2016/09/08/Vuex——Vue单页应用状态管理架构/index.html">
+<meta property="og:site_name" content="全面回忆">
+<meta property="og:description" content="Vue.js提供了很好的数据响应机制，让我们能够轻松实现数据变化到视图的更新映射。Vuex是在Flux的设计思想基础上产生的，官网对其解释为状态管理，个人觉得好理解一些就是数据管理。
+在做Vue开发，组件之间的数据传递大致可以分为两种，父子关系明确和相互独立的。如果有明确的父子关系，那么通过Vue的事件系统就可以实现。但是对于相互对立的组件，Vue没有可行的解决方案，之前的解决方案是在根组件创建一">
+<meta property="og:image" content="http://zhangdiweb.com/images/vuex_flow.png">
+<meta property="og:updated_time" content="2016-09-08T09:24:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vuex——Vue单页应用状态管理架构 | 全面回忆">
+<meta name="twitter:description" content="Vue.js提供了很好的数据响应机制，让我们能够轻松实现数据变化到视图的更新映射。Vuex是在Flux的设计思想基础上产生的，官网对其解释为状态管理，个人觉得好理解一些就是数据管理。
+在做Vue开发，组件之间的数据传递大致可以分为两种，父子关系明确和相互独立的。如果有明确的父子关系，那么通过Vue的事件系统就可以实现。但是对于相互对立的组件，Vue没有可行的解决方案，之前的解决方案是在根组件创建一">
+<meta name="twitter:image" content="http://zhangdiweb.com/images/vuex_flow.png">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">全面回忆</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          张棣
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/hahacoo" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">Vuex——Vue单页应用状态管理架构</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-09-08" class="post-meta__date date">2016-09-08</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/javascirpt/">javascirpt</a>
+            </font>
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/SPA/">SPA</a>, <a class="tags-link" href="/tags/Vue/">Vue</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>Vue.js提供了很好的数据响应机制，让我们能够轻松实现数据变化到视图的更新映射。Vuex是在Flux的设计思想基础上产生的，官网对其解释为状态管理，个人觉得好理解一些就是数据管理。</p>
+<p>在做Vue开发，组件之间的数据传递大致可以分为两种，父子关系明确和相互独立的。如果有明确的父子关系，那么通过Vue的事件系统就可以实现。但是对于相互对立的组件，Vue没有可行的解决方案，之前的解决方案是在根组件创建一个事件监听，通过根组件进行分发，或者通过第三方的工具库（postal.js）。有了Vuex我们现在有了更加优雅的解决方式，将这些需要到处传递的数据交给Vuex，保证所有组件都可以监视到变化从而做出响应。</p>
+<p><strong> Vuex流程 </strong></p>
+<p><img src="http://zhangdiweb.com/images/vuex_flow.png" alt="vuex_flow"></p>
+<a id="more"></a>
+<h2 id="Store"><a href="#Store" class="headerlink" title="Store"></a>Store</h2><p>Vuex的核心部分，字面意思“仓库”，确确实实也做了存储的功能，我们的应用状态都存储在这里，有如下特点：</p>
+<ol>
+<li>数据是响应式的。</li>
+<li>通过分发突变事件改变store中的值。</li>
+</ol>
+<p>store对象包括两个变量，<code>state</code>和<code>mutations</code>。state用来存储状态，vuex不允许直接修改state，需要通过mutatiion事件触发。</p>
+<h2 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h2><p><strong> 改变store中状态 </strong>，通过分发mutations的函数，在store里面通过mutations只是对事件进行了注册，真正触发需要在action中通过<code>dispatch</code>来触发。</p>
+<h2 id="Getters"><a href="#Getters" class="headerlink" title="Getters"></a>Getters</h2><p><strong> 从store中获取状态 </strong>，<code>getter</code>是一个函数，只接受一个state参数，用于返回状态。</p>
+<p>明确以上三个概念就可以将Vuex引入我们的项目进行开发了，vuex的使用还是很简单的，下面是一个简单例子：</p>
+<p><strong> store.js </strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">// store.js</div><div class="line">import Vue from &apos;vue&apos;</div><div class="line">import Vuex from &apos;vuex&apos;</div><div class="line"></div><div class="line">Vue.use(Vuex)</div><div class="line"></div><div class="line">const state = &#123;</div><div class="line">  app: &apos;&apos;,</div><div class="line">  path: &apos;&apos;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const mutations = &#123;</div><div class="line">  UPDATEAPP (state, app) &#123;</div><div class="line">  	state.app = app;</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  UPDATEPATH (state, path) &#123;</div><div class="line">  	state.path = path;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">export default new Vuex.Store(&#123;</div><div class="line">  state,</div><div class="line">  mutations</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p><strong> getter.js </strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//getters.js</div><div class="line"></div><div class="line">export const globalApp = function (state) &#123;</div><div class="line">  return state.app</div><div class="line">&#125;</div><div class="line"></div><div class="line">export const globalPath = function (state) &#123;</div><div class="line">  return state.path</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong> actions.js </strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//actions.js</div><div class="line"></div><div class="line">export const updateApp = function (&#123; dispatch &#125;, app) &#123;</div><div class="line">  dispatch(&apos;UPDATEAPP&apos;, app)</div><div class="line">&#125;</div><div class="line"></div><div class="line">export const updatePath = function (&#123; dispatch &#125;, path) &#123;</div><div class="line">  dispatch(&apos;UPDATEPATH&apos;, path)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong> app入口根组件 </strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//index.js</div><div class="line">import store from &apos;core/router/store/store&apos;;</div><div class="line">import Vue from &apos;vue&apos;</div><div class="line"></div><div class="line">export default &#123;</div><div class="line">	store,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong> 子组件 </strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//app.js</div><div class="line">import * as actions from &apos;core/router/store/actions&apos;;</div><div class="line">import * as getters from &apos;core/router/store/getters&apos;;</div><div class="line"></div><div class="line">export default &#123;</div><div class="line">	vuex: &#123;</div><div class="line">		getters,</div><div class="line">		actions </div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>下面从Vuex的源码进行分析，简单梳理一下它的实现原理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">//index.js</div><div class="line">class Store &#123;</div><div class="line"></div><div class="line">  constructor (&#123;</div><div class="line">    state = &#123;&#125;,</div><div class="line">    mutations = &#123;&#125;,</div><div class="line">    modules = &#123;&#125;,</div><div class="line">    middlewares = [],</div><div class="line">    strict = false</div><div class="line">  &#125; = &#123;&#125;) &#123;</div><div class="line">    ...</div><div class="line">    this._vm = new Vue(&#123;</div><div class="line">      data: &#123;</div><div class="line">        state</div><div class="line">      &#125;</div><div class="line">    &#125;)</div><div class="line">    ...</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  get state () &#123;</div><div class="line">    return this._vm.state</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  //静止对state直接赋值</div><div class="line">  set state (v) &#123;</div><div class="line">    throw new Error(&apos;[vuex] Vuex root state is read only.&apos;)</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  //dispatch函数，触发mutation函数</div><div class="line">  dispatch (type, ...payload) &#123;</div><div class="line">    ...</div><div class="line"> 	mutation(state, ...payload)</div><div class="line"> 	...</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">//导出一个Store类和install函数</div><div class="line">export default &#123;</div><div class="line">  Store,</div><div class="line">  install</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面是我筛选之后认为比较关键的一些代码，Vuex导出一个对象包括一个<code>Store</code>类和<code>install</code>函数，结合调用vuex的方法，可以看到<code>install</code>是Vue加载插件时调用的，<code>Store</code>生成了我们的store对象。在Store的构造函数可以看到，最关键的就是它在内部创建了一个独立的<code>vm</code>，并将<code>state</code>作为其<code>data</code>，这个就是响应式的关键一步，这样就创建了一个独立于其他任何一个组件的vm，实现“全局效果”，那之后都就差一步，就是让所有组件都可以访问到这个<code>vm</code>，并且感知到<code>state</code>的变化。我们继续往下看，看install又做了什么。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div></pre></td><td class="code"><pre><div class="line">export default function (Vue) &#123;</div><div class="line">  //在vue实例化阶段调用</div><div class="line">  if (version &gt;= 2) &#123;</div><div class="line">    Vue.mixin(usesInit ? &#123; init: vuexInit &#125; : &#123; beforeCreate: vuexInit &#125;)</div><div class="line">  &#125; else &#123;</div><div class="line">    const _init = Vue.prototype._init</div><div class="line">    Vue.prototype._init = function (options = &#123;&#125;) &#123;</div><div class="line">      options.init = options.init</div><div class="line">        ? [vuexInit].concat(options.init)</div><div class="line">        : vuexInit</div><div class="line">      _init.call(this, options)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  function vuexInit () &#123;</div><div class="line">    const options = this.$options</div><div class="line">    const &#123; store, vuex &#125; = options</div><div class="line">    //为每个组件添加$store对象，并且指向刚才提到的store对象</div><div class="line">    if (store) &#123;</div><div class="line">      this.$store = store</div><div class="line">    &#125; else if (options.parent &amp;&amp; options.parent.$store) &#123;</div><div class="line">      this.$store = options.parent.$store</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    ...</div><div class="line">    const &#123; state, actions &#125; = vuex</div><div class="line">    let &#123; getters &#125; = vuex</div><div class="line">  	</div><div class="line">  	//对实例的getter进行watch</div><div class="line">    for (const key in getters) &#123;</div><div class="line">       defineVuexGetter(this, key, getters[key])</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">    </div><div class="line">    ...</div><div class="line">    //为实例添加action方法</div><div class="line">    for (const key in actions) &#123;</div><div class="line">       options.methods[key] = makeBoundAction(this.$store, actions[key], key)</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  function setter () &#123;</div><div class="line">    throw new Error(&apos;vuex getter properties are read-only.&apos;)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  function defineVuexGetter (vm, key, getter) &#123;</div><div class="line">    Object.defineProperty(vm, key, &#123;</div><div class="line">        enumerable: true,</div><div class="line">        configurable: true,</div><div class="line">        get: makeComputedGetter(vm.$store, getter),</div><div class="line">        set: setter</div><div class="line">      &#125;)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  function makeComputedGetter (store, getter) &#123;</div><div class="line">    const id = store._getterCacheId</div><div class="line">    if (getter[id]) &#123;</div><div class="line">      return getter[id]</div><div class="line">    &#125;</div><div class="line">    //watch store创建的vm的state的变化，实现响应式</div><div class="line">    const vm = store._vm</div><div class="line">    ...</div><div class="line">    const watcher = new Watcher(</div><div class="line">      vm,</div><div class="line">      vm =&gt; getter(vm.state),</div><div class="line">      null,</div><div class="line">      &#123; lazy: true &#125;</div><div class="line">    )</div><div class="line">    const computedGetter = () =&gt; &#123;</div><div class="line">      ...</div><div class="line">      return watcher.value</div><div class="line">    &#125;</div><div class="line">    getter[id] = computedGetter</div><div class="line">    return computedGetter</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  function makeBoundAction (store, action, key) &#123;</div><div class="line">    return function vuexBoundAction (...args) &#123;</div><div class="line">      return action.call(this, store, ...args)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>从上面的代码可以看到Vuex改变了Vue实例化过程，做了两件事。第一，为每个组件的getters进行watch，从而对state的变化能够响应；第二，为每个组件扩展了actions方法，让每个组件可以直接调用，通过dispatch修改state的值。</p>
+<p>总结一下，Vuex的原理就是通过内部的一个vm实例，充分利用Vue的watch方法，让每个组件都能对state的变化做出响应，并且通过$stored对象，实现对state的修改。到此Vuex核心功能就介绍完了，文章主要希望结合源码能理清实现原理，使用介绍比较简单，跟多内容请移步到<a href="http://vuex.vuejs.org/" target="_blank" rel="external">Vuex官方文档</a></p>
+
+  </section>
+
+  
+  
+
+<section class="post-comments">
+
+    <div class="ds-thread" data-thread-key="2016/09/08/Vuex——Vue单页应用状态管理架构/"></div>
+
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"zhangcom"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script> 
+
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
