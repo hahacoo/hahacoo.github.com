@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="baidu-site-verification" content="9SA7MeFJuT" />
+    
+
+    <title>
+      JavaScript设计模式——单例模式 | 全面回忆 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="zhangdi(hahacoo)">
+    
+    
+
+    <meta name="description" content="单例模式的定义：一个类只能创建一个实体对象。可能遇到的场景线程池的创建，全局缓存的创建等等。
+结合JavaScript的语言特点，如果要实现单例，只需要通过一个全局变量来作为标志位，每次创建对象的时候都去判断一次，如果之前已经创建过则直接返回，没有则new一个出来，上代码：
+123456789101112131415161718var instance = null;var Person = fu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript设计模式——单例模式 | 全面回忆">
+<meta property="og:url" content="http://zhangdiweb.com/2016/09/17/JavaScript设计模式——单例模式/index.html">
+<meta property="og:site_name" content="全面回忆">
+<meta property="og:description" content="单例模式的定义：一个类只能创建一个实体对象。可能遇到的场景线程池的创建，全局缓存的创建等等。
+结合JavaScript的语言特点，如果要实现单例，只需要通过一个全局变量来作为标志位，每次创建对象的时候都去判断一次，如果之前已经创建过则直接返回，没有则new一个出来，上代码：
+123456789101112131415161718var instance = null;var Person = fu">
+<meta property="og:updated_time" content="2016-09-17T12:22:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript设计模式——单例模式 | 全面回忆">
+<meta name="twitter:description" content="单例模式的定义：一个类只能创建一个实体对象。可能遇到的场景线程池的创建，全局缓存的创建等等。
+结合JavaScript的语言特点，如果要实现单例，只需要通过一个全局变量来作为标志位，每次创建对象的时候都去判断一次，如果之前已经创建过则直接返回，没有则new一个出来，上代码：
+123456789101112131415161718var instance = null;var Person = fu">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">全面回忆</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          张棣
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/hahacoo" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">JavaScript设计模式——单例模式</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-09-17" class="post-meta__date date">2016-09-17</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/javascript/">javascript</a>
+            </font>
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/设计模式/">设计模式</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>单例模式的定义：一个类只能创建一个实体对象。可能遇到的场景线程池的创建，全局缓存的创建等等。</p>
+<p>结合JavaScript的语言特点，如果要实现单例，只需要通过一个全局变量来作为标志位，每次创建对象的时候都去判断一次，如果之前已经创建过则直接返回，没有则new一个出来，上代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">var instance = null;</div><div class="line"></div><div class="line">var Person = function() &#123;</div><div class="line">   this.name = &apos;hahacoo&apos;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Person.create = function() &#123;</div><div class="line">   if(!instance)&#123;</div><div class="line">       instance = new Person()</div><div class="line"></div><div class="line">   &#125;</div><div class="line">   return instance</div><div class="line">&#125;</div><div class="line"></div><div class="line">var p1 = Person.create();</div><div class="line">var p2 = Person.create();</div><div class="line"></div><div class="line">console.log(p1 === p2); //true</div></pre></td></tr></table></figure>
+<p>以上就是一个简单的单例模式，但是和以往我们通过new的方式创建一个对象还是有很大的区别。而且全局变量的创建也造成了变量的污染。下面是改进后的代码实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">var Person = function() &#123;</div><div class="line">   this.name = &apos;hahacoo&apos;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var ProxySingleton = function(fn) &#123;</div><div class="line">	var instance;</div><div class="line">	</div><div class="line">	return function() &#123;</div><div class="line">		if(!instance) &#123;</div><div class="line">			return new fn()</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		return instance;</div><div class="line">	&#125;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">var SingletonPerson = ProxySingleton(Person);</div><div class="line">var p1 = new SingletonPerson();</div><div class="line">var p2 = new SingletonPerson();</div><div class="line"></div><div class="line">console.log(p1 === p2); //true</div></pre></td></tr></table></figure>
+<p>通过代理，将自定义类和单例实现的逻辑分开，符合单一职责的原则，也符合我们的书写习惯。</p>
+<p>JavaScript作为一门函数式脚步语言，不仅仅局限在面向对象，对于函数编程如何实现单例模式呢？我们在做web开发时，经常会有这样的需求，对于多次操作只希望有一个dom对象被更改，譬如说对话框，提示框，也同样符合单例模式的特点，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">var showDialog = function() &#123;</div><div class="line">	var dialog = document.createElement(&apos;div&apos;);</div><div class="line">	dialog.style.display = &apos;none&apos;;</div><div class="line">	</div><div class="line">	document.body.appendChild(dialog);</div><div class="line">	</div><div class="line">	return dialog;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var button = document.getElementById(&apos;#show&apos;);</div><div class="line"></div><div class="line">var singletonDialog = function(fn) &#123;</div><div class="line">	var dialog;</div><div class="line">	</div><div class="line">	return function() &#123;</div><div class="line">		if(!dialog) &#123;</div><div class="line">			dialog = fn.apply(this, arguments)</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		return dialog</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var dialogDom = singletonDialog(showDialog);</div><div class="line"></div><div class="line">button.onclick = function() &#123;</div><div class="line">	var dialog = dialogDom();</div><div class="line">	dialog.style.display = &quot;static&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如上，在页面就只会存在一份dom节点，确保不会重复创建。</p>
+<p>单例模式的关键就是遵循<strong>单一职责</strong>原则，将我们的<strong>业务逻辑代码</strong>和<strong>单例实现代码</strong>分开，灵活使用<strong>闭包</strong>和<strong>高阶函数</strong>，保证对象的唯一性。</p>
+
+  </section>
+
+  
+  
+
+<section class="post-comments">
+
+    <div class="ds-thread" data-thread-key="2016/09/17/JavaScript设计模式——单例模式/"></div>
+
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"zhangcom"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script> 
+
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
