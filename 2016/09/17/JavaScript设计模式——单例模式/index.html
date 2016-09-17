@@ -16,22 +16,16 @@
     
     
 
-    <meta name="description" content="单例模式的定义：一个类只能创建一个实体对象。可能遇到的场景线程池的创建，全局缓存的创建等等。
-结合JavaScript的语言特点，如果要实现单例，只需要通过一个全局变量来作为标志位，每次创建对象的时候都去判断一次，如果之前已经创建过则直接返回，没有则new一个出来，上代码：
-123456789101112131415161718var instance = null;var Person = fu">
+    <meta name="description" content="单例模式的定义：一个类只能创建一个实体对象。可能遇到的场景线程池的创建，全局缓存的创建等等。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript设计模式——单例模式 | 全面回忆">
 <meta property="og:url" content="http://zhangdiweb.com/2016/09/17/JavaScript设计模式——单例模式/index.html">
 <meta property="og:site_name" content="全面回忆">
-<meta property="og:description" content="单例模式的定义：一个类只能创建一个实体对象。可能遇到的场景线程池的创建，全局缓存的创建等等。
-结合JavaScript的语言特点，如果要实现单例，只需要通过一个全局变量来作为标志位，每次创建对象的时候都去判断一次，如果之前已经创建过则直接返回，没有则new一个出来，上代码：
-123456789101112131415161718var instance = null;var Person = fu">
-<meta property="og:updated_time" content="2016-09-17T12:22:07.000Z">
+<meta property="og:description" content="单例模式的定义：一个类只能创建一个实体对象。可能遇到的场景线程池的创建，全局缓存的创建等等。">
+<meta property="og:updated_time" content="2016-09-17T12:26:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript设计模式——单例模式 | 全面回忆">
-<meta name="twitter:description" content="单例模式的定义：一个类只能创建一个实体对象。可能遇到的场景线程池的创建，全局缓存的创建等等。
-结合JavaScript的语言特点，如果要实现单例，只需要通过一个全局变量来作为标志位，每次创建对象的时候都去判断一次，如果之前已经创建过则直接返回，没有则new一个出来，上代码：
-123456789101112131415161718var instance = null;var Person = fu">
+<meta name="twitter:description" content="单例模式的定义：一个类只能创建一个实体对象。可能遇到的场景线程池的创建，全局缓存的创建等等。">
     
     
     
@@ -228,6 +222,7 @@ classes that you can use:
 
   <section id="post-content" class="article-content post">
     <p>单例模式的定义：一个类只能创建一个实体对象。可能遇到的场景线程池的创建，全局缓存的创建等等。</p>
+<a id="more"></a>
 <p>结合JavaScript的语言特点，如果要实现单例，只需要通过一个全局变量来作为标志位，每次创建对象的时候都去判断一次，如果之前已经创建过则直接返回，没有则new一个出来，上代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">var instance = null;</div><div class="line"></div><div class="line">var Person = function() &#123;</div><div class="line">   this.name = &apos;hahacoo&apos;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Person.create = function() &#123;</div><div class="line">   if(!instance)&#123;</div><div class="line">       instance = new Person()</div><div class="line"></div><div class="line">   &#125;</div><div class="line">   return instance</div><div class="line">&#125;</div><div class="line"></div><div class="line">var p1 = Person.create();</div><div class="line">var p2 = Person.create();</div><div class="line"></div><div class="line">console.log(p1 === p2); //true</div></pre></td></tr></table></figure>
 <p>以上就是一个简单的单例模式，但是和以往我们通过new的方式创建一个对象还是有很大的区别。而且全局变量的创建也造成了变量的污染。下面是改进后的代码实现：</p>
