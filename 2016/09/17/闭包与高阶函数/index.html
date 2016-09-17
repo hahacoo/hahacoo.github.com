@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="baidu-site-verification" content="9SA7MeFJuT" />
+    
+
+    <title>
+      闭包与高阶函数 | 全面回忆 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="zhangdi(hahacoo)">
+    
+    
+
+    <meta name="description" content="闭包和高阶函数闭包是一个什么概念，之前有人会说一个函数返回一个函数，这就是闭包，真的只有返回函数才叫闭包么？这只是面子上的东西，只看到形式上的东西，并没有抓住本质。
+高阶函数是一个和闭包密不可分的的概念，之后你慢慢会发现。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="闭包与高阶函数 | 全面回忆">
+<meta property="og:url" content="http://zhangdiweb.com/2016/09/17/闭包与高阶函数/index.html">
+<meta property="og:site_name" content="全面回忆">
+<meta property="og:description" content="闭包和高阶函数闭包是一个什么概念，之前有人会说一个函数返回一个函数，这就是闭包，真的只有返回函数才叫闭包么？这只是面子上的东西，只看到形式上的东西，并没有抓住本质。
+高阶函数是一个和闭包密不可分的的概念，之后你慢慢会发现。">
+<meta property="og:updated_time" content="2016-09-17T06:49:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="闭包与高阶函数 | 全面回忆">
+<meta name="twitter:description" content="闭包和高阶函数闭包是一个什么概念，之前有人会说一个函数返回一个函数，这就是闭包，真的只有返回函数才叫闭包么？这只是面子上的东西，只看到形式上的东西，并没有抓住本质。
+高阶函数是一个和闭包密不可分的的概念，之后你慢慢会发现。">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">全面回忆</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          张棣
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/hahacoo" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">闭包与高阶函数</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-09-17" class="post-meta__date date">2016-09-17</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/javascirpt/">javascirpt</a>
+            </font>
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h2 id="闭包和高阶函数"><a href="#闭包和高阶函数" class="headerlink" title="闭包和高阶函数"></a>闭包和高阶函数</h2><p><strong>闭包</strong>是一个什么概念，之前有人会说一个函数返回一个函数，这就是闭包，真的只有返回函数才叫闭包么？这只是面子上的东西，只看到形式上的东西，并没有抓住本质。</p>
+<p><strong>高阶函数</strong>是一个和<strong>闭包</strong>密不可分的的概念，之后你慢慢会发现。</p>
+<a id="more"></a>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>说到<strong>闭包</strong>，离不开两个概念，变量作用域和变量生命周期。</p>
+<p><strong>1. 变量作用域</strong></p>
+<p>变量在其定义的时候，作用域的范围也就确定了。全局变量在任何位置都可以访问。局部变量只能函数内部访问。在函数中访问变量，如果内部找不到，会依次沿着作用域链从内到外搜索。</p>
+<p><strong>2. 变量生命周期</strong></p>
+<p>全局变量的生命周期是永久的，局部变量会在函数执行完之后被销毁。闭包的作用就是延续了<strong>局部变量的生命周期</strong>。</p>
+<p>很经典的一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var buttons = document.getElementsByTagName(&quot;button&quot;);</div><div class="line">for (var i = 0, len = buttons.length; i &lt; len; i++) &#123;</div><div class="line">    buttons[i].onclick = clickEvent(i);</div><div class="line">&#125;</div><div class="line">function clickEvent(i)&#123;</div><div class="line">    return function () &#123;</div><div class="line">        console.log(i);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>利用闭包的特点，经常用了实现<em>全局变量私有化</em>和<em>变量生命周期延续</em>。</p>
+<ul>
+<li><p>全局变量私有化</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var sum = (function() &#123;</div><div class="line">	var result = 0;</div><div class="line">	return function(a) &#123;</div><div class="line">		return result += a; </div><div class="line">	&#125;</div><div class="line">&#125;)()</div></pre></td></tr></table></figure>
+</li>
+<li><p>变量生命周期延续</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var report = (function() &#123;</div><div class="line">	var images = [];</div><div class="line">	return function(src) &#123;</div><div class="line">		var img = new Image()</div><div class="line">		images.push(img)</div><div class="line">		img.src = src;</div><div class="line">	&#125;</div><div class="line">&#125;)()</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>像上面例子中的变量result和images，对于他们内部返回的函数来说，他们就是<strong>自由变量</strong>，既不是参数又不是内部变量，而且他的生命周期与内部函数一致，即使创建环境消失也不例外，这种形式就叫做闭包。</p>
+<h3 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h3><p>至少满足以下一个条件的函数就可以成为高阶函数。</p>
+<blockquote>
+<ol>
+<li><p>函数可以作为参数传递。</p>
+</li>
+<li><p>函数可以作为返回值输出。</p>
+</li>
+</ol>
+</blockquote>
+<p>这么看来，闭包是不是和高阶函数密不可分呢。</p>
+<p><strong>1. 函数作为参数</strong></p>
+<p>运用的方面很多，最典型的情况就是回调函数。实际上我们就是将可变的逻辑代码部分从不变的部分抽离出来，这样我们的代码就可以非常灵活，满足不同的需求。比方说<code>Array.prototype.sort</code>，我们通过回调函数将我们的排序具体实现告诉数组，分分钟钟实现多种排序效果。</p>
+<p><strong>2. 函数作为返回值输出</strong></p>
+<p>让函数返回一个可执行的函数，那这个操作就可以延续下去，常常用在函数包装上面。</p>
+<p>下面是一个包装resize函数的方法，由于resize触发很频繁，因此通过setTimeout进行节流控制。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">var resize = function(fn, interval) &#123;</div><div class="line">	var self = fn,</div><div class="line">		timer,</div><div class="line">		firstTime = true;</div><div class="line">	return function() &#123;</div><div class="line">		var args = argumensts,</div><div class="line">			that = this;</div><div class="line">		if(firstTime) &#123;</div><div class="line">			self.apply(this, argumensts);</div><div class="line">			return firstTime = false;</div><div class="line">		&#125;</div><div class="line">		if(timer) &#123;</div><div class="line">			return false;</div><div class="line">		&#125;</div><div class="line">		timer = setTimeout(function() &#123;</div><div class="line">			clearTimeout(timer);</div><div class="line">			self.apply(that, args);</div><div class="line">			timer = null</div><div class="line">		&#125;, interval || 500)</div><div class="line">	&#125;;</div><div class="line">&#125;</div><div class="line">window.onresize = resize(function() &#123;</div><div class="line">	console.log(&quot;resize&quot;)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>闭包和高阶函数是设计模式的基础，通过闭合和高阶函数的组合实现多种设计模式，之后遇到再做介绍。</p>
+
+  </section>
+
+  
+  
+
+<section class="post-comments">
+
+    <div class="ds-thread" data-thread-key="2016/09/17/闭包与高阶函数/"></div>
+
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"zhangcom"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script> 
+
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
