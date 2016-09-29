@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="baidu-site-verification" content="9SA7MeFJuT" />
+    
+
+    <title>
+      各种DOM宽高和鼠标的位置的计算 | 全面回忆 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="zhangdi(hahacoo)">
+    
+    
+
+    <meta name="description" content="工作中有实现拖拽的需求，会涉及到DOM的宽高计算和鼠标的位置的确定，记录一下他们的不同，别给忘了。
+&amp;lt;!—more—&amp;gt;
+宽高计算以dom的宽度为例，高度与其一致。
+
+offsetWidth 包括DOM盒模型的内容宽度  + 内边距 + 边框。
+clientWidth 包括DOM盒模型的可视区域的宽度 + 内边距，但不包括边框和滚动条的宽度。
+scrollWidth DOM内容包括滚动部">
+<meta property="og:type" content="article">
+<meta property="og:title" content="各种DOM宽高和鼠标的位置的计算 | 全面回忆">
+<meta property="og:url" content="http://zhangdiweb.com/2016/09/29/各种DOM宽高和鼠标的位置的计算/index.html">
+<meta property="og:site_name" content="全面回忆">
+<meta property="og:description" content="工作中有实现拖拽的需求，会涉及到DOM的宽高计算和鼠标的位置的确定，记录一下他们的不同，别给忘了。
+&amp;lt;!—more—&amp;gt;
+宽高计算以dom的宽度为例，高度与其一致。
+
+offsetWidth 包括DOM盒模型的内容宽度  + 内边距 + 边框。
+clientWidth 包括DOM盒模型的可视区域的宽度 + 内边距，但不包括边框和滚动条的宽度。
+scrollWidth DOM内容包括滚动部">
+<meta property="og:image" content="http://zhangdiweb.com/images/box.png">
+<meta property="og:updated_time" content="2016-09-29T04:03:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="各种DOM宽高和鼠标的位置的计算 | 全面回忆">
+<meta name="twitter:description" content="工作中有实现拖拽的需求，会涉及到DOM的宽高计算和鼠标的位置的确定，记录一下他们的不同，别给忘了。
+&amp;lt;!—more—&amp;gt;
+宽高计算以dom的宽度为例，高度与其一致。
+
+offsetWidth 包括DOM盒模型的内容宽度  + 内边距 + 边框。
+clientWidth 包括DOM盒模型的可视区域的宽度 + 内边距，但不包括边框和滚动条的宽度。
+scrollWidth DOM内容包括滚动部">
+<meta name="twitter:image" content="http://zhangdiweb.com/images/box.png">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">全面回忆</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          张棣
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/hahacoo" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">各种DOM宽高和鼠标的位置的计算</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-09-29" class="post-meta__date date">2016-09-29</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/CSS/">CSS</a>
+            </font>
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>工作中有实现拖拽的需求，会涉及到DOM的宽高计算和鼠标的位置的确定，记录一下他们的不同，别给忘了。</p>
+<p>&lt;!—more—&gt;</p>
+<h3 id="宽高计算"><a href="#宽高计算" class="headerlink" title="宽高计算"></a>宽高计算</h3><p>以dom的宽度为例，高度与其一致。</p>
+<ol>
+<li><strong>offsetWidth</strong> 包括<em>DOM盒模型的内容宽度</em>  + <em>内边距</em> + <em>边框</em>。</li>
+<li><strong>clientWidth</strong> 包括<em>DOM盒模型的可视区域的宽度</em> + <em>内边距</em>，但不包括<strong>边框</strong>和<strong>滚动条</strong>的宽度。</li>
+<li><strong>scrollWidth</strong> DOM内容包括滚动部分的宽度。</li>
+</ol>
+<p>下图是在网上的一张图片，出处忘了是哪的了，可以很清楚看到他们的不同。</p>
+<p><img src="http://zhangdiweb.com/images/box.png" alt="box"></p>
+<h3 id="鼠标位置计算"><a href="#鼠标位置计算" class="headerlink" title="鼠标位置计算"></a>鼠标位置计算</h3><ol>
+<li><strong>pageX/Y</strong> 相对于整个页面的位置，同一位置的鼠标位置<strong>不受</strong>scroll的影响。</li>
+<li><strong>clientX/Y</strong> 相对于浏览器窗口的位置，同一位置的鼠标位置<strong>受</strong>scroll的影响。</li>
+<li><strong>screenX/Y</strong> 相对于整个屏幕的位置。</li>
+<li><strong>offsetX/Y</strong> 相对于当前元素内边界的位置。</li>
+<li><strong>layerX/Y</strong> 相对于当前元素外边界的位置，包括border。</li>
+<li><strong>x/y</strong> 和clientX/Y等价。</li>
+</ol>
+<h3 id="获取DOM的位置信息"><a href="#获取DOM的位置信息" class="headerlink" title="获取DOM的位置信息"></a>获取DOM的位置信息</h3><p>DOM元素有两个属性，<strong>offsetLeft</strong>和<strong>offsetTop</strong>，这两个属性指的都是其相对于父元素的位置，如要获得绝对位置，需要迭代进行计算</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getTop</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">   <span class="keyword">var</span> offset=e.offsetTop;</div><div class="line">   <span class="keyword">if</span>(e.offsetParent !== <span class="literal">null</span>)&#123;</div><div class="line">     offset+=getTop(e.offsetParent);</div><div class="line">   &#125;         </div><div class="line">   <span class="keyword">return</span> offset;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>另外也可以通过<strong>getBoundingClientRect()</strong>方法获取dom的位置信息。兼容性如下：</p>
+<table>
+<thead>
+<tr>
+<th>chrome</th>
+<th>firefox</th>
+<th>ie</th>
+<th>opera</th>
+<th>safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>3.0</td>
+<td>4.0</td>
+<td>YES</td>
+<td>4.0</td>
+</tr>
+</tbody>
+</table>
+
+  </section>
+
+  
+  
+
+<section class="post-comments">
+
+    <div class="ds-thread" data-thread-key="2016/09/29/各种DOM宽高和鼠标的位置的计算/"></div>
+
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"zhangcom"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script> 
+
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
