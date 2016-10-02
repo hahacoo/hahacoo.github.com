@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="baidu-site-verification" content="9SA7MeFJuT" />
+    
+
+    <title>
+      JavaScript设计模式——代理模式 | 全面回忆 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="zhangdi(hahacoo)">
+    
+    
+
+    <meta name="description" content="代理模式的定义：为一个对象创建一个替代品，提供全部特性和部分特性，实现访问控制。显示中比方说火车站和火车票代售点的关系。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript设计模式——代理模式 | 全面回忆">
+<meta property="og:url" content="http://zhangdiweb.com/2016/10/02/JavaScript设计模式——代理模式/index.html">
+<meta property="og:site_name" content="全面回忆">
+<meta property="og:description" content="代理模式的定义：为一个对象创建一个替代品，提供全部特性和部分特性，实现访问控制。显示中比方说火车站和火车票代售点的关系。">
+<meta property="og:updated_time" content="2016-10-02T06:21:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript设计模式——代理模式 | 全面回忆">
+<meta name="twitter:description" content="代理模式的定义：为一个对象创建一个替代品，提供全部特性和部分特性，实现访问控制。显示中比方说火车站和火车票代售点的关系。">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">全面回忆</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          张棣
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/hahacoo" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">JavaScript设计模式——代理模式</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-10-02" class="post-meta__date date">2016-10-02</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/javascript/">javascript</a>
+            </font>
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/设计模式/">设计模式</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>代理模式的定义：为一个对象创建一个替代品，提供全部特性和部分特性，实现访问控制。显示中比方说火车站和火车票代售点的关系。</p>
+<a id="more"></a>
+<p>在代理模式中，有三个参与者，分别是<strong>调用</strong>、<strong>代理</strong>、<strong>本体</strong>。与一般的调用到本体的关系相比，通过中间代理，我们可以完成一些处理，再讲请求转交到本体。我们让本体专注于自身逻辑的实现，将一些额外的行为交个代理实现，首先满足单一职责的原则，各自的变化不会影响到对方，同时由于代理暴露给调用者的借口是一样（或者少于本体）的，以后不再需要代理的时候可以直接替换为本体。</p>
+<p>按照代理模式实现的功能，可以将其分为<strong>保护代理</strong>、<strong>虚拟代理</strong>和<strong>缓存代理</strong>。</p>
+<h3 id="保护代理"><a href="#保护代理" class="headerlink" title="保护代理"></a>保护代理</h3><p>通过代理，将一些不满足要求的请求过滤掉，阻断到本体的作用的作用过程，用于控制不同对象对目标对象的访问。</p>
+<h3 id="虚拟代理"><a href="#虚拟代理" class="headerlink" title="虚拟代理"></a>虚拟代理</h3><p>把一些开销很大的对象，延迟到真正需要他的时候再去创建它。</p>
+<h3 id="缓存代理"><a href="#缓存代理" class="headerlink" title="缓存代理"></a>缓存代理</h3><p>将一些计算过程比较耗资源的结果缓存起来，只要在参数一致的情况下直接返回结果。</p>
+<p>以ajax请求为例，当用户满足权限要求的时候，便可以正常访问，不满足就直接返回错误提示，对于一些连续频繁的操作，可以合并之后一次性发送到服务器，减少网络请求（实时性要求不高），同时对于一部分请求结果，在请求参数不变的情况下，可以直接返回缓存的结果（数据不会频繁变动）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> calculate = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="comment">//代替ajax操作</span></div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'计算结果'</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> proxyCalculate = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  	<span class="keyword">var</span> cache = &#123;&#125;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		<span class="comment">//调用者没有权限错误提示</span></div><div class="line">      	<span class="keyword">if</span>(!authority) &#123;</div><div class="line">          	<span class="built_in">console</span>.log(<span class="string">'权限不够'</span>)</div><div class="line">      	&#125;</div><div class="line">      	</div><div class="line">      	<span class="keyword">var</span> params = [].prototype.join.call(<span class="built_in">arguments</span>, <span class="string">','</span>)</div><div class="line">        <span class="comment">//判断是否从缓存读取结果</span></div><div class="line">        <span class="keyword">if</span>(params <span class="keyword">in</span> cache) &#123;</div><div class="line">           <span class="keyword">return</span> cache[params]</div><div class="line">        &#125;</div><div class="line">      	</div><div class="line">      	<span class="keyword">return</span> cache[params] = calculate.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>)</div><div class="line">    &#125;</div><div class="line">&#125;)()</div><div class="line"></div><div class="line">proxyCalculate();</div></pre></td></tr></table></figure>
+  </section>
+
+  
+  
+
+<section class="post-comments">
+
+    <div class="ds-thread" data-thread-key="2016/10/02/JavaScript设计模式——代理模式/"></div>
+
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"zhangcom"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script> 
+
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
