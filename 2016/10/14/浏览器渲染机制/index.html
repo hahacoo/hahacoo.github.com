@@ -22,7 +22,7 @@
 <meta property="og:url" content="http://zhangdiweb.com/2016/10/14/浏览器渲染机制/index.html">
 <meta property="og:site_name" content="全面回忆">
 <meta property="og:description" content="以webKit为例，自己参考了一些资料以及结合自己的测试，了解浏览器的渲染是怎么一个过程。这是一个复杂的过程，自己了解的只是一个大概过程，记录下来，或许将来会有帮助。">
-<meta property="og:updated_time" content="2016-10-14T06:17:39.000Z">
+<meta property="og:updated_time" content="2016-10-14T07:30:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器渲染机制 | 全面回忆">
 <meta name="twitter:description" content="以webKit为例，自己参考了一些资料以及结合自己的测试，了解浏览器的渲染是怎么一个过程。这是一个复杂的过程，自己了解的只是一个大概过程，记录下来，或许将来会有帮助。">
@@ -227,8 +227,13 @@ classes that you can use:
 <li>布局</li>
 <li>绘制</li>
 </ol>
-<p>解析HTML，浏览器为了缓解渲染被阻塞，会<strong>预加载资源</strong>，<strong>并行</strong>发起css、图片、js的请求。等外联的css文件下载完，将CSSOM和DOM一起生成RenderTree，之后进行layout和painting，期间js的执行会被位于前面的css文件的加载过程阻塞，同时js的执行会中断DOM树的更新，js之前的部分会直接渲染，js之后的部分会在js执行完之后渲染。</p>
+<p>解析HTML，浏览器为了缓解渲染被阻塞，会<strong>预加载资源</strong>，<strong>并行</strong>发起css、图片、js的请求。等外联的css文件下载完，将CSSOM和DOM一起生成RenderTree，之后进行layout和painting，期间js的执行会被位于前面的css文件的加载过程阻塞，同时外部js的加载会中断DOM树的更新，js之前的部分会直接渲染，js之后的部分会在js执行完之后渲染。</p>
 <p>如此看来css资源的加载对于页面的渲染起了关键作用。</p>
+<h3 id="load、DOMContentLoaded和readystatechange的触发时机"><a href="#load、DOMContentLoaded和readystatechange的触发时机" class="headerlink" title="load、DOMContentLoaded和readystatechange的触发时机"></a>load、DOMContentLoaded和readystatechange的触发时机</h3><ul>
+<li>当所有资源（<strong>css</strong>、<strong>js</strong>、<strong>图片</strong>）都加载完成触发<strong>load</strong>事件</li>
+<li>页面文档完全加载并解析完毕（<strong>dom树生成</strong>，<strong>js的加载和执行</strong>），不等待<strong>css</strong>、<strong>图片</strong>的加载，触发DOMContentLoaded事件。正如上面提到的js的执行会在之前的css文件加载完成之后才执行，从这方面来说，事件的触发任然受css的影响</li>
+<li>dom节点的状态发生变化的时候触发<strong>readystatechange</strong>事件</li>
+</ul>
 
   </section>
 
