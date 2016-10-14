@@ -16,16 +16,16 @@
     
     
 
-    <meta name="description" content="以webKit为例，自己参考了一些资料以及结合自己的测试，了解浏览器的渲染是怎么一个过程。这是一个复杂的过程，自己了解的只是一个大概过程，记录下来，或许将来会有帮助。">
+    <meta name="description" content="以webKit为例，自己参考了一些资料以及结合自己的测试，对浏览器的渲染过程做了一点功课。这是一个复杂的过程，自己了解的也只是一个大概过程，记录下来，留着以后慢慢体会。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浏览器渲染机制 | 全面回忆">
 <meta property="og:url" content="http://zhangdiweb.com/2016/10/14/浏览器渲染机制/index.html">
 <meta property="og:site_name" content="全面回忆">
-<meta property="og:description" content="以webKit为例，自己参考了一些资料以及结合自己的测试，了解浏览器的渲染是怎么一个过程。这是一个复杂的过程，自己了解的只是一个大概过程，记录下来，或许将来会有帮助。">
-<meta property="og:updated_time" content="2016-10-14T07:30:25.000Z">
+<meta property="og:description" content="以webKit为例，自己参考了一些资料以及结合自己的测试，对浏览器的渲染过程做了一点功课。这是一个复杂的过程，自己了解的也只是一个大概过程，记录下来，留着以后慢慢体会。">
+<meta property="og:updated_time" content="2016-10-14T07:36:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器渲染机制 | 全面回忆">
-<meta name="twitter:description" content="以webKit为例，自己参考了一些资料以及结合自己的测试，了解浏览器的渲染是怎么一个过程。这是一个复杂的过程，自己了解的只是一个大概过程，记录下来，或许将来会有帮助。">
+<meta name="twitter:description" content="以webKit为例，自己参考了一些资料以及结合自己的测试，对浏览器的渲染过程做了一点功课。这是一个复杂的过程，自己了解的也只是一个大概过程，记录下来，留着以后慢慢体会。">
     
     
     
@@ -216,7 +216,7 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <p>以webKit为例，自己参考了一些资料以及结合自己的测试，了解浏览器的渲染是怎么一个过程。这是一个复杂的过程，自己了解的只是一个大概过程，记录下来，或许将来会有帮助。</p>
+    <p>以webKit为例，自己参考了一些资料以及结合自己的测试，对浏览器的渲染过程做了一点功课。这是一个复杂的过程，自己了解的也只是一个大概过程，记录下来，留着以后慢慢体会。</p>
 <a id="more"></a>
 <p>渲染的过程大致为：</p>
 <ol>
@@ -231,7 +231,7 @@ classes that you can use:
 <p>如此看来css资源的加载对于页面的渲染起了关键作用。</p>
 <h3 id="load、DOMContentLoaded和readystatechange的触发时机"><a href="#load、DOMContentLoaded和readystatechange的触发时机" class="headerlink" title="load、DOMContentLoaded和readystatechange的触发时机"></a>load、DOMContentLoaded和readystatechange的触发时机</h3><ul>
 <li>当所有资源（<strong>css</strong>、<strong>js</strong>、<strong>图片</strong>）都加载完成触发<strong>load</strong>事件</li>
-<li>页面文档完全加载并解析完毕（<strong>dom树生成</strong>，<strong>js的加载和执行</strong>），不等待<strong>css</strong>、<strong>图片</strong>的加载，触发DOMContentLoaded事件。正如上面提到的js的执行会在之前的css文件加载完成之后才执行，从这方面来说，事件的触发任然受css的影响</li>
+<li>页面文档完全加载并解析完毕（<strong>dom树生成</strong>，<strong>js的加载和执行</strong>），不等待<strong>css</strong>、<strong>图片</strong>的加载，触发DOMContentLoaded事件。正如上面说到的js的执行会在之前的css文件加载完成之后才执行，从这方面来说，该事件的触发任然受css的影响</li>
 <li>dom节点的状态发生变化的时候触发<strong>readystatechange</strong>事件</li>
 </ul>
 
