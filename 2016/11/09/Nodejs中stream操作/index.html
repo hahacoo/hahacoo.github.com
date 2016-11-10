@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="baidu-site-verification" content="9SA7MeFJuT" />
+    
+
+    <title>
+      Nodejs中stream操作 | 全面回忆 | zhangdiweb | zhangdi | hahacoo 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="zhangdi">
+    
+    
+    
+      <meta name="keywords" content="全面回忆,javascript,css">
+    
+
+    <meta name="description" content="第一次接触Nodejs中的流（stream），是因为使用gulp做项目构建的时候。Node中有两种缓存的处理方式，一种接收全部数据，一次性从缓存读取；另一种是采用“stream”的方式，一边接受数据，一边处理。第一种方式就是传统的文件操作方式，容易理解，但遇到大文件的时候就变得不那么友好了，需要花费很长时间等待数据接收，之后再进行操作。Nodejs中的流是EventEmitter的一个实例，没收到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nodejs中stream操作 | 全面回忆">
+<meta property="og:url" content="http://zhangdiweb.com/2016/11/09/Nodejs中stream操作/index.html">
+<meta property="og:site_name" content="全面回忆">
+<meta property="og:description" content="第一次接触Nodejs中的流（stream），是因为使用gulp做项目构建的时候。Node中有两种缓存的处理方式，一种接收全部数据，一次性从缓存读取；另一种是采用“stream”的方式，一边接受数据，一边处理。第一种方式就是传统的文件操作方式，容易理解，但遇到大文件的时候就变得不那么友好了，需要花费很长时间等待数据接收，之后再进行操作。Nodejs中的流是EventEmitter的一个实例，没收到">
+<meta property="og:updated_time" content="2016-11-10T03:29:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nodejs中stream操作 | 全面回忆">
+<meta name="twitter:description" content="第一次接触Nodejs中的流（stream），是因为使用gulp做项目构建的时候。Node中有两种缓存的处理方式，一种接收全部数据，一次性从缓存读取；另一种是采用“stream”的方式，一边接受数据，一边处理。第一种方式就是传统的文件操作方式，容易理解，但遇到大文件的时候就变得不那么友好了，需要花费很长时间等待数据接收，之后再进行操作。Nodejs中的流是EventEmitter的一个实例，没收到">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">全面回忆</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          张棣
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/hahacoo" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">Nodejs中stream操作</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-11-09" class="post-meta__date date">2016-11-09</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>第一次接触Nodejs中的流（stream），是因为使用gulp做项目构建的时候。Node中有两种缓存的处理方式，一种接收全部数据，一次性从缓存读取；另一种是采用“stream”的方式，一边接受数据，一边处理。第一种方式就是传统的文件操作方式，容易理解，但遇到大文件的时候就变得不那么友好了，需要花费很长时间等待数据接收，之后再进行操作。Nodejs中的流是EventEmitter的一个实例，没收到一部分数据就触发一个事件，通过监听事件对数据进行处理，提高了效率。</p>
+<a id="more"></a>
+<p>Stream具有data、end、close等事件，既可以读取数据(<strong>Readable</strong>)，也可以写入数据(<strong>Writable</strong>)，也可以两者兼具(<strong>Duplex</strong>)。读写数据时，每读入（或写入）一段数据，就会触发一次data事件，全部读取（或写入）完毕，触发end事件。如果发生错误，则触发error事件。</p>
+<p>一个对象只要部署了数据流接口，就可以从它读取数据，或者写入数据。Node内部很多涉及IO处理的对象，都部署了Stream接口，比如HTTP连接、文件读写、标准输入输出等。</p>
+<h2 id="可读流操作"><a href="#可读流操作" class="headerlink" title="可读流操作"></a>可读流操作</h2><p>可读流有两种状刚刚新建的时候处于暂停态，当调用pipe方法、resume方法或者添加data事件的监听函数时可以激活流状态。</p>
+<h3 id="1-数据传输"><a href="#1-数据传输" class="headerlink" title="1.数据传输"></a>1.数据传输</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> readable = getReadableStreamSomehow();  </div><div class="line"><span class="keyword">var</span> data；</div><div class="line">readable.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>) </span>&#123;  </div><div class="line">  <span class="comment">//本次得到的数据块</span></div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'got %d bytes of data'</span>, chunk.length);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">readable.on(<span class="string">'readable'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> chunk;</div><div class="line">  <span class="comment">//没有数据返回的时候返回null</span></div><div class="line">  <span class="keyword">while</span>(chunk = stream.read()) &#123;</div><div class="line">    data += chunk;</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="2-数据传输结束"><a href="#2-数据传输结束" class="headerlink" title="2.数据传输结束"></a>2.数据传输结束</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> readable = getReadableStreamSomehow();</div><div class="line"></div><div class="line">readable.on(<span class="string">'data'</span>, (chunk) =&gt; &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'got %d bytes of data'</span>, chunk.length);</div><div class="line">&#125;);</div><div class="line">readable.on(<span class="string">'end'</span>, () =&gt; &#123;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'there will be no more data.'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><h4 id="1-pause"><a href="#1-pause" class="headerlink" title="1. pause()"></a>1. pause()</h4><p>停止触发<code>data</code>事件，进入暂停态。</p>
+<h4 id="2-resume"><a href="#2-resume" class="headerlink" title="2. resume()"></a>2. resume()</h4><p>继续触发<code>data</code>事件，进入流动太。</p>
+<h4 id="3-read"><a href="#3-read" class="headerlink" title="3. read()"></a>3. read()</h4><p>从系统缓存读取并返回数据。如果读不到数据，则返回null。</p>
+<h4 id="4-pipe-dest-option"><a href="#4-pipe-dest-option" class="headerlink" title="4. pipe(dest[,option])"></a>4. pipe(dest[,option])</h4><p>将可读流写到指定目的地，不需要做额外操作。传输完成之后，默认会调用目的地的end方法，不能再写入，可以通过参数<code>end = false</code>打开目的地址。</p>
+<h2 id="可写流操作"><a href="#可写流操作" class="headerlink" title="可写流操作"></a>可写流操作</h2><h3 id="1-数据写入"><a href="#1-数据写入" class="headerlink" title="1.数据写入"></a>1.数据写入</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">var</span> readableStream = fs.createReadStream(<span class="string">'1.txt'</span>);</div><div class="line"><span class="keyword">var</span> writableStream = fs.createWriteStream(<span class="string">'2.txt'</span>);</div><div class="line"></div><div class="line">readableStream.setEncoding(<span class="string">'utf8'</span>);</div><div class="line"></div><div class="line">readableStream.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>) </span>&#123;</div><div class="line">  writableStream.write(chunk);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="常用方法-1"><a href="#常用方法-1" class="headerlink" title="常用方法"></a>常用方法</h3><h4 id="1-write-chunk-encoding-callback"><a href="#1-write-chunk-encoding-callback" class="headerlink" title="1. write(chunk[,encoding][,callback])"></a>1. write(chunk[,encoding][,callback])</h4><p>chunk可以是字符串也可以是二级制数。第二个参数是写入编码；第三个参数是一个回调函数，数据处理完成时，会触发这个回调函数。write方法返回一个布尔值，表示本次数据处理结果。如果返回true，数据写入成功。如果返回false，表示写入数据被缓存起来了，不能立刻写入新数据。实际仍然可以继续写入，只不过数据会被缓存到内存中。最好的方式还是等待返回true再写入。</p>
+<h4 id="2-end-chunk-encoding-callback"><a href="#2-end-chunk-encoding-callback" class="headerlink" title="2. end([chunk][,encoding][,callback])"></a>2. end([chunk][,encoding][,callback])</h4><p>chunk可以是字符串也可以是二级制数。第二个参数是写入编码；第三个参数是一个回调函数，finish事件发生时，会触发这个回调函数。</p>
+<h3 id="常用事件"><a href="#常用事件" class="headerlink" title="常用事件"></a>常用事件</h3><h4 id="1-drain"><a href="#1-drain" class="headerlink" title="1. drain"></a>1. drain</h4><p>执行write方法返回false，当缓存数据全部写入完成，可以继续写入时，触发drain事件，表示缓存空了。</p>
+<h4 id="2-finish"><a href="#2-finish" class="headerlink" title="2. finish"></a>2. finish</h4><p>执行end方法，所有缓存的数据释放，触发finish事件。</p>
+
+  </section>
+
+  
+  
+
+<section class="post-comments">
+
+    <div class="ds-thread" data-thread-key="2016/11/09/Nodejs中stream操作/"></div>
+
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"zhangcom"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script> 
+
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
