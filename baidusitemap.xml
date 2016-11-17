@@ -4,8 +4,44 @@
 
     
   <url>
+    <loc>http://zhangdiweb.com/2016/11/17/Content-Security-Poliy/</loc>
+    <lastmod>2016-11-17T06:54:16.000Z</lastmod>
+    <data>
+        <display>
+        <title>Content-Security-Poliy</title>
+        <pubTime>2016-11-17T06:52:54.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="其他" url="http://zhangdiweb.com/categories/%E5%85%B6%E4%BB%96/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://zhangdiweb.com/2016/08/26/Nodejs%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2016-11-10T06:40:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>Nodejs中的文件路径问题</title>
+        <pubTime>2016-08-26T09:41:09.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Nodejs" url="http://zhangdiweb.com/categories/Nodejs/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://zhangdiweb.com/2016/11/09/Nodejs%E4%B8%ADstream%E6%93%8D%E4%BD%9C/</loc>
-    <lastmod>2016-11-10T06:24:15.000Z</lastmod>
+    <lastmod>2016-11-10T06:39:16.000Z</lastmod>
     <data>
         <display>
         <title>Nodejs中stream操作</title>
@@ -164,24 +200,6 @@
         <display>
         <title>express中间件和路由</title>
         <pubTime>2016-09-02T06:26:45.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Nodejs" url="http://zhangdiweb.com/categories/Nodejs/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://zhangdiweb.com/2016/08/26/Nodejs%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</loc>
-    <lastmod>2016-09-02T06:28:20.000Z</lastmod>
-    <data>
-        <display>
-        <title>Nodejs中的文件路径问题</title>
-        <pubTime>2016-08-26T09:41:09.000Z</pubTime>
         
          
            

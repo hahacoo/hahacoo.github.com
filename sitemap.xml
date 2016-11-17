@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://zhangdiweb.com/2016/11/17/Content-Security-Poliy/</loc>
+    
+    <lastmod>2016-11-17T06:54:16.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://zhangdiweb.com/2016/08/26/Nodejs%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</loc>
+    
+    <lastmod>2016-11-10T06:40:53.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://zhangdiweb.com/2016/11/09/Nodejs%E4%B8%ADstream%E6%93%8D%E4%BD%9C/</loc>
     
-    <lastmod>2016-11-10T06:24:15.000Z</lastmod>
+    <lastmod>2016-11-10T06:39:16.000Z</lastmod>
     
   </url>
   
@@ -61,13 +75,6 @@
     <loc>http://zhangdiweb.com/2016/09/02/express%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%92%8C%E8%B7%AF%E7%94%B1/</loc>
     
     <lastmod>2016-09-02T07:28:48.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://zhangdiweb.com/2016/08/26/Nodejs%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</loc>
-    
-    <lastmod>2016-09-02T06:28:20.000Z</lastmod>
     
   </url>
   

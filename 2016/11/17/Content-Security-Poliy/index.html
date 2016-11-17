@@ -7,7 +7,7 @@
     
 
     <title>
-      归档: 2016/11 | zhangdiweb | zhangdi | hahacoo 
+      Content-Security-Poliy | 全面回忆 | zhangdiweb | zhangdi | hahacoo 
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -19,15 +19,16 @@
       <meta name="keywords" content="全面回忆,javascript,css">
     
 
-    <meta name="description" content="技术分享、作品展示、知识积累">
-<meta property="og:type" content="website">
-<meta property="og:title" content="归档: 2016/11">
-<meta property="og:url" content="http://zhangdiweb.com/archives/2016/11/index.html">
+    <meta name="description" content="在做chrome插件开发的时候，接触的这个概念，内容安全策略。通过白名单的方式，控制页面中哪些资源可以正常执行，哪些不可以，从而减少XSS的攻击。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Content-Security-Poliy | 全面回忆">
+<meta property="og:url" content="http://zhangdiweb.com/2016/11/17/Content-Security-Poliy/index.html">
 <meta property="og:site_name" content="全面回忆">
-<meta property="og:description" content="技术分享、作品展示、知识积累">
+<meta property="og:description" content="在做chrome插件开发的时候，接触的这个概念，内容安全策略。通过白名单的方式，控制页面中哪些资源可以正常执行，哪些不可以，从而减少XSS的攻击。">
+<meta property="og:updated_time" content="2016-11-17T06:54:16.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="归档: 2016/11">
-<meta name="twitter:description" content="技术分享、作品展示、知识积累">
+<meta name="twitter:title" content="Content-Security-Poliy | 全面回忆">
+<meta name="twitter:description" content="在做chrome插件开发的时候，接触的这个概念，内容安全策略。通过白名单的方式，控制页面中哪些资源可以正常执行，哪些不可以，从而减少XSS的攻击。">
     
     
     
@@ -188,70 +189,97 @@ classes that you can use:
         <div class="content-wrapper__inner entry">
             
 
+<article class="post-container post-container--single">
 
-  <h1 class="archive-title">归档: 2016/11</h1>
-  <hr class="post-list__divider" />
-
-
-<div class="main-post-list">
-    <ol class="post-list">
+  <header class="post-header">
     
-    
-    <li>
+    <h1 class="post-title">Content-Security-Poliy</h1>
 
-      <h2 class="post-list__post-title post-title">
-        <a href="/2016/11/17/Content-Security-Poliy/" title="link to Content-Security-Poliy">Content-Security-Poliy</a>
-      </h2>
-
-      <div class="post-list__meta">
-
-        <time datetime="2016-11-17" class="post-list__meta--date date">2016-11-17</time> 
-      </div>
-
-      <div class="excerpt">
-        
-          <p>在做chrome插件开发的时候，接触的这个概念，<strong>内容安全策略</strong>。通过白名单的方式，控制页面中哪些资源可以正常执行，哪些不可以，从而减少XSS的攻击。</p>
-        
-      </div>
-
-      <hr class="post-list__divider" />
-    </li>
-    
-    <li>
-
-      <h2 class="post-list__post-title post-title">
-        <a href="/2016/11/09/Nodejs中stream操作/" title="link to Nodejs中stream操作">Nodejs中stream操作</a>
-      </h2>
-
-      <div class="post-list__meta">
-
-        <time datetime="2016-11-09" class="post-list__meta--date date">2016-11-09</time> 
-      </div>
-
-      <div class="excerpt">
-        
-          <p>第一次接触Nodejs中的流（stream），是因为使用gulp做项目构建的时候。Node中有两种缓存的处理方式，一种接收全部数据，一次性从缓存读取；另一种是采用“stream”的方式，一边接受数据，一边处理。第一种方式就是传统的文件操作方式，容易理解，但遇到大文件的时候就变得不那么友好了，需要花费很长时间等待数据接收，之后再进行操作。Nodejs中的流是EventEmitter的一个实例，没收到一部分数据就触发一个事件，通过监听事件对数据进行处理，提高了效率。</p>
-        
-      </div>
-
-      <hr class="post-list__divider" />
-    </li>
-    
-  </ol>
-
-
-  <hr class="post-list__divider " />
-
-<nav class="pagination" role="navigation">
     
 
-    <span class="pagination__page-number"> 1 / 1</span>
+    <div class="post-meta">
+      <time datetime="2016-11-17" class="post-meta__date date">2016-11-17</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/其他/">其他</a>
+            </font>
+          
+
+          
+
+      </span>
+    </div>
     
     
-</nav>
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>在做chrome插件开发的时候，接触的这个概念，<strong>内容安全策略</strong>。通过白名单的方式，控制页面中哪些资源可以正常执行，哪些不可以，从而减少XSS的攻击。</p>
+<a id="more"></a>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><ol>
+<li>指令集合<ul>
+<li>default-src：指定那些没有被精确指令定位的默认安全策略</li>
+<li>script-src：指定javascript的来源</li>
+<li>style-src：指定css的来源</li>
+<li>connect-src：指定XHR、WebSocket的来源</li>
+<li>img-src：指定图片和图标的来源</li>
+<li>media-src：指定媒体资源的来源</li>
+<li>font-src：指定字体的来源</li>
+<li>child-src：指定web worker、frame的来源</li>
+</ul>
+</li>
+<li>内容源<ul>
+<li>host：主机地址</li>
+<li>*：运行任何内容</li>
+<li>‘none’：不允许任何内容</li>
+<li>‘self’：运行同源内容</li>
+<li>‘unsafe-inline’：运行使用内联的script标签、style标签和事件绑定</li>
+<li>‘unsafe-eval’：运行使用eval()方法</li>
+</ul>
+</li>
+</ol>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><ol>
+<li><p>HTML中通过meta标签设置</p>
+<p><code>&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;script-src &#39;self&#39;&quot;&gt;&lt;/meta&gt;</code></p>
+</li>
+<li><p>在HTTP的响应头配置CSP</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Responsec Header</div><div class="line">	Content-Security-Policy: script-src 'self'</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>CSP指定的都是白名单，如上面例子，非同源的javascript不会被加载及执行。</p>
+
+  </section>
+
+  
+  
+
+<section class="post-comments">
+
+    <div class="ds-thread" data-thread-key="2016/11/17/Content-Security-Poliy/"></div>
+
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"zhangcom"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script> 
+
+</section>
 
 
-</div>
+</article>
+
+
             <footer class="footer">
 
     <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
@@ -268,6 +296,18 @@ classes that you can use:
 
     
     
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
     
     
     <!--kill ie6 -->
