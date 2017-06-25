@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="baidu-site-verification" content="9SA7MeFJuT" />
+    
+
+    <title>
+      编写可维护的JavaScript | 全面回忆 | zhangdiweb | zhangdi | hahacoo 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="zhangdi">
+    
+    
+    
+      <meta name="keywords" content="全面回忆,javascript,css">
+    
+
+    <meta name="description" content="”编程风格“和”编程规范“，两个经常听到的名词。编程风格是编程规范的一种，用来约束单文件中的代码的规范。编码规范还包括编程最佳实践、文件和目录规范、注释等方面。对于团队的整体发展，规范还是必须和有效的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编写可维护的JavaScript | 全面回忆">
+<meta property="og:url" content="http://zhangdiweb.com/2017/06/18/编写可维护的JavaScript/index.html">
+<meta property="og:site_name" content="全面回忆">
+<meta property="og:description" content="”编程风格“和”编程规范“，两个经常听到的名词。编程风格是编程规范的一种，用来约束单文件中的代码的规范。编码规范还包括编程最佳实践、文件和目录规范、注释等方面。对于团队的整体发展，规范还是必须和有效的。">
+<meta property="og:updated_time" content="2017-06-25T03:32:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编写可维护的JavaScript | 全面回忆">
+<meta name="twitter:description" content="”编程风格“和”编程规范“，两个经常听到的名词。编程风格是编程规范的一种，用来约束单文件中的代码的规范。编码规范还包括编程最佳实践、文件和目录规范、注释等方面。对于团队的整体发展，规范还是必须和有效的。">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">全面回忆</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          张棣
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/hahacoo" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">编写可维护的JavaScript</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-06-18" class="post-meta__date date">2017-06-18</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/javascript/">javascript</a>
+            </font>
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>”编程风格“和”编程规范“，两个经常听到的名词。编程风格是编程规范的一种，用来约束单文件中的代码的规范。编码规范还包括<strong>编程最佳实践</strong>、<strong>文件和目录规范</strong>、<strong>注释</strong>等方面。对于团队的整体发展，规范还是必须和有效的。</p>
+<a id="more"></a>
+<h3 id="编程风格"><a href="#编程风格" class="headerlink" title="编程风格"></a>编程风格</h3><h4 id="缩进层级"><a href="#缩进层级" class="headerlink" title="缩进层级"></a>缩进层级</h4><ul>
+<li><p>制表符缩进（<strong>推荐</strong>）</p>
+<p>优点：可以配合编辑器，控制一个制表符的展现长度。</p>
+<p>缺点：不同系统对制表符的解释不一致。</p>
+</li>
+<li><p>空格符缩进</p>
+<p>2个或者4个空格表示一个缩进。</p>
+</li>
+</ul>
+<h4 id="语句结尾"><a href="#语句结尾" class="headerlink" title="语句结尾"></a>语句结尾</h4><p>是否在每行结束添加分号结尾。</p>
+<p>依赖于分析器的自动分号插入机制，JavaScript会自动插入分号，大多说场景下都会正确插入分号，一些特殊情况会出错，比如<code>return</code>。</p>
+<p>个人感觉良好的代码习惯可以省略分号。（<strong>推荐</strong>）</p>
+<h4 id="行的长度"><a href="#行的长度" class="headerlink" title="行的长度"></a>行的长度</h4><p>由于历史问题，编辑器单行限制，建议单行长度80~100个字符。（<strong>推荐</strong>）</p>
+<h4 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h4><p>换行位置，<strong>运算符后换行</strong>，下一行增加<strong>两个层级</strong>的缩进。</p>
+<p>特殊情况，赋值语句保持<strong>左对齐</strong>。</p>
+<h4 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h4><ul>
+<li>控制语句之前增加空行（if/for）。</li>
+<li>控制语句块内第一条语句（可选）。</li>
+<li>方法之间。</li>
+<li>方法内第一条语句之前。</li>
+<li>变量命名与下一条语句。</li>
+<li>多行或单行注释之前。</li>
+<li>逻辑片段之间。</li>
+<li><code>return</code>语句之前。</li>
+</ul>
+<h4 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h4><ul>
+<li><p>变量和函数</p>
+<p>变量和函数均遵循驼峰命名法，变量前缀应当是<strong>名词</strong>，函数前缀应当是<strong>动词</strong>。</p>
+<p>函数命名常见约定</p>
+<p>| 动词      | 含义       |<br>| ——- | ——– |<br>| can     | 返回一个布尔值  |<br>| has     | 返回一个布尔值  |<br>| is      | 返回一个布尔值  |<br>| get     | 返回一个非布尔值 |<br>| set     | 保存       |<br>| add     | 添加       |<br>| remove  | 删除       |<br>| create  | 创建       |<br>| destory | 销毁       |<br>| start   | 开始       |<br>| stop    | 停止       |<br>| insert  | 插入       |<br>| delete  | 移除       |<br>| clean   | 清理       |<br>| update  | 更新       |<br>| find    | 查找       |<br>| search  | 搜索       |<br>| refresh | 刷新       |<br>| enable  | 启用       |<br>| disable | 关闭       |</p>
+</li>
+<li><p>常量</p>
+</li>
+</ul>
+<p>​       使用<strong>大写字母</strong>和<strong>下划线</strong>命名。</p>
+<ul>
+<li><p>构造函数</p>
+<p>使用“大驼峰”命名，首字母大写。</p>
+</li>
+</ul>
+<h4 id="直接量"><a href="#直接量" class="headerlink" title="直接量"></a>直接量</h4><ul>
+<li><p>字符串</p>
+<p>使用单引号表示直接量。</p>
+</li>
+<li><p>数字</p>
+</li>
+<li><p>null</p>
+<p>null可以理解为对象的占位符，以下场景使用null。</p>
+<ul>
+<li>初始化变量，这个变量可能赋值为一个对象。</li>
+<li>用来和一个已知初始化的变量比较。</li>
+<li>当函数的参数期望是对象时，用作参数传入。</li>
+<li>当函数的返回值期望是对象，作为返回值。</li>
+</ul>
+</li>
+<li><p>undefined</p>
+<p>undefined可以理解为初始化变量等待赋值，在JavaScript中未声明的变量也可以被理解为“undefined”。在比较一个变量是否未赋值使用<code>typeof</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> person</div><div class="line"><span class="keyword">typeof</span> person</div><div class="line"><span class="keyword">typeof</span> foo</div><div class="line">person === <span class="literal">undefined</span></div><div class="line">foo === <span class="literal">undefined</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h4><ul>
+<li><p>单行注释</p>
+<ul>
+<li>双斜线之后保留一个空格。</li>
+<li>独占一行的注释与下一行代码缩进保持一致。</li>
+<li>代码行尾部的注释之间要保留一个空格。</li>
+<li>禁止用多条单行注释表示多行注释。</li>
+</ul>
+</li>
+<li><p>多行注释</p>
+</li>
+<li><p>文档注释</p>
+<p>遵循JSDoc规范。</p>
+</li>
+</ul>
+
+  </section>
+
+  
+  
+
+<section class="post-comments">
+
+    <div class="ds-thread" data-thread-key="2017/06/18/编写可维护的JavaScript/"></div>
+
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"zhangcom"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script> 
+
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
