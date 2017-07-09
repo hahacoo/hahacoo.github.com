@@ -25,7 +25,7 @@
 <meta property="og:url" content="http://zhangdiweb.com/2017/06/18/编写可维护的JavaScript/index.html">
 <meta property="og:site_name" content="全面回忆">
 <meta property="og:description" content="”编程风格“和”编程规范“，两个经常听到的名词。编程风格是编程规范的一种，用来约束单文件中的代码的规范。编码规范还包括编程最佳实践、文件和目录规范、注释等方面。对于团队的整体发展，规范还是必须和有效的。">
-<meta property="og:updated_time" content="2017-06-25T03:43:35.000Z">
+<meta property="og:updated_time" content="2017-07-09T16:27:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编写可维护的JavaScript | 全面回忆">
 <meta name="twitter:description" content="”编程风格“和”编程规范“，两个经常听到的名词。编程风格是编程规范的一种，用来约束单文件中的代码的规范。编码规范还包括编程最佳实践、文件和目录规范、注释等方面。对于团队的整体发展，规范还是必须和有效的。">
@@ -240,13 +240,15 @@ classes that you can use:
 <li>控制语句之前增加空行（if/for）。</li>
 <li>控制语句块内第一条语句（可选）。</li>
 <li>方法之间。</li>
-<li>方法内第一条语句之前。</li>
+<li>方法内第一条语句之前（可选）。</li>
 <li>变量命名与下一条语句。</li>
 <li>多行或单行注释之前。</li>
 <li>逻辑片段之间。</li>
 <li><code>return</code>语句之前。</li>
 </ul>
-<h4 id="6-命名"><a href="#6-命名" class="headerlink" title="6.命名"></a>6.命名</h4><ul>
+<h4 id="6-运算符间距"><a href="#6-运算符间距" class="headerlink" title="6.运算符间距"></a>6.运算符间距</h4><p>运算符前后必须使用一个空格来保持表达式整洁。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> found = (values[i] === item)</div><div class="line"></div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</div><div class="line"> 	process(i)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="7-命名"><a href="#7-命名" class="headerlink" title="7.命名"></a>7.命名</h4><ul>
 <li><p>变量和函数</p>
 <p>变量和函数均遵循驼峰命名法，变量前缀应当是<strong>名词</strong>，函数前缀应当是<strong>动词</strong>。</p>
 <p>函数命名常见约定</p>
@@ -351,7 +353,7 @@ classes that you can use:
 <p>使用“大驼峰”命名，首字母大写。</p>
 </li>
 </ul>
-<h4 id="7-直接量"><a href="#7-直接量" class="headerlink" title="7.直接量"></a>7.直接量</h4><ul>
+<h4 id="8-直接量"><a href="#8-直接量" class="headerlink" title="8.直接量"></a>8.直接量</h4><ul>
 <li><p>字符串</p>
 <p>使用单引号表示直接量。</p>
 </li>
@@ -371,7 +373,12 @@ classes that you can use:
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> person</div><div class="line"><span class="keyword">typeof</span> person</div><div class="line"><span class="keyword">typeof</span> foo</div><div class="line">person === <span class="literal">undefined</span></div><div class="line">foo === <span class="literal">undefined</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h4 id="8-注释"><a href="#8-注释" class="headerlink" title="8.注释"></a>8.注释</h4><ul>
+<h4 id="9-变量声明"><a href="#9-变量声明" class="headerlink" title="9.变量声明"></a>9.变量声明</h4><p>每行一个变量，所有行都应当多一层缩进，初始化的变量应当在未初始化的变量之前。</p>
+<h4 id="10-函数声明"><a href="#10-函数声明" class="headerlink" title="10.函数声明"></a>10.函数声明</h4><p>函数名和开始圆括号之间不应当有空格，结束的圆括号和左边的花括号之间应该留一个空格。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params">arg1, arg2</span>) </span>&#123;</div><div class="line">  </div><div class="line">&#125;</div><div class="line"></div><div class="line">object.method = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="11-语句"><a href="#11-语句" class="headerlink" title="11.语句"></a>11.语句</h4><p>像<code>if</code>一样的语句，其后面应该紧跟一个空格。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">if</span> (condition) &#123;</div><div class="line">  </div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> (initialization; condition; update) &#123;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="12-注释"><a href="#12-注释" class="headerlink" title="12.注释"></a>12.注释</h4><ul>
 <li><p>单行注释</p>
 <ul>
 <li>双斜线之后保留一个空格。</li>
@@ -384,6 +391,21 @@ classes that you can use:
 </li>
 <li><p>文档注释</p>
 <p>遵循JSDoc规范。</p>
+</li>
+<li><p>注释声明</p>
+<ul>
+<li><p>TODO</p>
+</li>
+<li><p>HACK</p>
+<p>说明使用hack的原因。</p>
+</li>
+<li><p>FIXME</p>
+<p>代码有问题应尽快修复。</p>
+</li>
+<li><p>REVIEW</p>
+<p>代码的改动需要评审。</p>
+</li>
+</ul>
 </li>
 </ul>
 
