@@ -25,7 +25,7 @@
 <meta property="og:url" content="http://zhangdiweb.com/2017/12/10/离线Web应用/index.html">
 <meta property="og:site_name" content="全面回忆">
 <meta property="og:description" content="HTML5新增了“应用程序缓存”，允许应用程序将运行的所有文件（HTML、CSS、JavaScript、图片等）保存到用户的浏览器中。这种缓存方式不会随着用户清楚浏览器缓存而被清除，只有被用户“卸载”的时候，它们才会被删除，这种方式更像“存储”，而不是“缓存”。">
-<meta property="og:updated_time" content="2017-12-10T13:37:13.000Z">
+<meta property="og:updated_time" content="2017-12-10T13:40:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="离线Web应用 | 全面回忆">
 <meta name="twitter:description" content="HTML5新增了“应用程序缓存”，允许应用程序将运行的所有文件（HTML、CSS、JavaScript、图片等）保存到用户的浏览器中。这种缓存方式不会随着用户清楚浏览器缓存而被清除，只有被用户“卸载”的时候，它们才会被删除，这种方式更像“存储”，而不是“缓存”。">
@@ -216,13 +216,12 @@ classes that you can use:
   <section id="post-content" class="article-content post">
     <p>HTML5新增了“应用程序缓存”，允许应用程序将运行的所有文件（HTML、CSS、JavaScript、图片等）保存到用户的浏览器中。这种缓存方式不会随着用户清楚浏览器缓存而被清除，只有被用户“卸载”的时候，它们才会被删除，这种方式更像“存储”，而不是“缓存”。</p>
 <a id="more"></a>
-<p>###清单文件</p>
-<p>“本地安装”的目的就是保证我们的Web应用在离线状态下同样也能正常使用，同时有和App一样的秒开的效果。</p>
+<h3 id="清单文件"><a href="#清单文件" class="headerlink" title="清单文件"></a>清单文件</h3><p>“本地安装”的目的就是保证我们的Web应用在离线状态下同样也能正常使用，同时有和App一样的秒开的效果。</p>
 <p>实现应用程序缓存首选得有一个清单文件，包含了缓存资源的URL信息。同时需要在HTML的<code>&lt;html&gt;</code>标签设置<code>manifest</code>属性，指定清单文件</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">manifest</span>=<span class="string">"app.appcache"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>清单文件首行内容以“CACHE MANIFEST”字符串开头，之后是资源URL信息，下面是一个简单的清单文件：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">CACHE MANIFEST</div><div class="line"></div><div class="line"># 我是注释，下面是URL信息</div><div class="line">app.html</div><div class="line">app.js</div><div class="line">app.css</div><div class="line">img/background.png</div></pre></td></tr></table></figure>
-<p><em>\</em>注意：清单文件MIME的类型必须是“text/cache-manifest，否则应用缓存失败。*</p>
+<p><em>注意：清单文件MIME的类型必须是“text/cache-manifest，否则应用缓存失败。</em></p>
 <p>一旦一个应用首次下载并缓存，之后的任何加载请求就都来自<strong>缓存</strong>，不会载入不在清单中的资源，因此应用的所有资源都得在清单中。</p>
 <h4 id="复杂清单文件"><a href="#复杂清单文件" class="headerlink" title="复杂清单文件"></a>复杂清单文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">CACHE MANIFEST</div><div class="line"></div><div class="line">CACHE:</div><div class="line">app.html</div><div class="line">app.js</div><div class="line">app.css</div><div class="line"></div><div class="line">FALLBACK:</div><div class="line">video/ offline_help.html</div><div class="line"></div><div class="line">NETWORK:</div><div class="line">cgi/</div></pre></td></tr></table></figure>
 <p>“<strong>NETWORK:</strong>“表明这些资源都不缓存，通过网络加载，脚本多配置在该区域。这种配置和上面提到到资源必须在清单中是冲突的，在离线状态下，这部分资源就加载不了。</p>
@@ -250,7 +249,7 @@ classes that you can use:
 <li>清单文件不存在</li>
 </ul>
 <p>浏览器处于在线状态，并且应用已经缓存完成，如果清单文件不存在，会触发“obslote”事件，并将应用从缓存中移除。</p>
-<p><em>\</em>注意：上述事件都需要注册在<code>window.applicationCache</code>这个对象上，支持离线缓存的浏览器都会定义该属性。*</p>
+<p><em>注意：上述事件都需要注册在<code>window.applicationCache</code>这个对象上，支持离线缓存的浏览器都会定义该属性。</em></p>
 
   </section>
 
