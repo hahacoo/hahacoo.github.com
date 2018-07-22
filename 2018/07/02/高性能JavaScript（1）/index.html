@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="baidu-site-verification" content="9SA7MeFJuT" />
+    
+
+    <title>
+      高性能JavaScript（1） | 全面回忆 | zhangdiweb | zhangdi | hahacoo 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="zhangdi">
+    
+    
+    
+      <meta name="keywords" content="全面回忆,javascript,css">
+    
+
+    <meta name="description" content="多说浏览器使用单一进程来处理UI刷新和JavaScript执行，所以JavaScript执行时间越长，浏览器等待响应的时间就越长。无论是内嵌脚本还是外链文件，浏览器渲染都必须停下来等待脚本执行完成。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高性能JavaScript（1） | 全面回忆">
+<meta property="og:url" content="http://zhangdiweb.com/2018/07/02/高性能JavaScript（1）/index.html">
+<meta property="og:site_name" content="全面回忆">
+<meta property="og:description" content="多说浏览器使用单一进程来处理UI刷新和JavaScript执行，所以JavaScript执行时间越长，浏览器等待响应的时间就越长。无论是内嵌脚本还是外链文件，浏览器渲染都必须停下来等待脚本执行完成。">
+<meta property="og:updated_time" content="2018-07-22T09:27:41.982Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高性能JavaScript（1） | 全面回忆">
+<meta name="twitter:description" content="多说浏览器使用单一进程来处理UI刷新和JavaScript执行，所以JavaScript执行时间越长，浏览器等待响应的时间就越长。无论是内嵌脚本还是外链文件，浏览器渲染都必须停下来等待脚本执行完成。">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">全面回忆</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          张棣
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/hahacoo" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">高性能JavaScript（1）</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2018-07-02" class="post-meta__date date">2018-07-02</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/javascript/">javascript</a>
+            </font>
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>多说浏览器使用单一进程来处理UI刷新和JavaScript执行，所以JavaScript执行时间越长，浏览器等待响应的时间就越长。无论是内嵌脚本还是外链文件，浏览器渲染都必须停下来等待脚本执行完成。</p>
+<a id="more"></a>
+<h3 id="脚本位置"><a href="#脚本位置" class="headerlink" title="脚本位置"></a>脚本位置</h3><p><code>&lt;script&gt;</code>标签可以出现在<code>&lt;head&gt;</code>或<code>&lt;body&gt;</code>中，浏览器在解析到<code>&lt;body&gt;</code>之前，不会渲染页面的任何部分，因此将脚本放到页面的顶部将会导致明显的延迟。目前浏览器都支持资源的并行下载，<code>&lt;script&gt;</code>标签在下载外部资源时不会阻塞其他<code>&lt;script&gt;</code>标签，但是仍然会阻塞其他资源的下载，如图片。尽管下载过程不会互相影响，但是渲染过程仍然得在JavaScript下载并执行之后才能继续。</p>
+<p>因此推荐将<code>&lt;script&gt;</code>标签尽可能放到<code>&lt;body&gt;</code>底部，减少页面渲染的影响。</p>
+<h3 id="无阻塞的脚本"><a href="#无阻塞的脚本" class="headerlink" title="无阻塞的脚本"></a>无阻塞的脚本</h3><p>无阻塞脚本，在页面加载完成后才加载JavaScript代码，意味着在window的<code>load</code>事件触发后在下载脚本。</p>
+<h4 id="延迟脚本"><a href="#延迟脚本" class="headerlink" title="延迟脚本"></a>延迟脚本</h4><p><code>&lt;script&gt;</code>标签的<code>defer</code>属性指明脚本不会修改<code>DOM</code>，因此代码能安全地延迟执行。当页面解析到带有<code>defer</code>的<code>&lt;script&gt;</code>标签是开始下载，并不会执行，直到<code>DOM</code>加载完成。带有<code>defer</code>属性的<code>&lt;script&gt;</code>标签下载<strong>不会阻塞</strong>浏览器的其他进程。不论内嵌还是外链脚本，都不会在<code>DOM</code>加载前执行。除了<code>defer</code>属性还有<code>async</code>属性，用于异步加载脚本，相同点都是并行下载，区别在于执行时机，<code>async</code>是加载完成后自动执行，而<code>defer</code>需要等待页面加载完成后执行。</p>
+<h4 id="动态脚本元素"><a href="#动态脚本元素" class="headerlink" title="动态脚本元素"></a>动态脚本元素</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">"script"</span>)</div><div class="line">script.type = <span class="string">"text/javascript"</span></div><div class="line">script.src = <span class="string">"file.js"</span></div><div class="line"><span class="built_in">document</span>.getElementByTagName(<span class="string">"head"</span>)[<span class="number">0</span>].appendChild(script)</div></pre></td></tr></table></figure>
+<p>这个<code>file.js</code>在元素被添加到页面是开始下载，重点在于，无论何时下载，文件的下载和执行过程<strong>不会阻塞</strong>页面的其他进程。</p>
+
+  </section>
+
+  
+  
+
+<section class="post-comments">
+
+    <div class="ds-thread" data-thread-key="2018/07/02/高性能JavaScript（1）/"></div>
+
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"zhangcom"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script> 
+
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
