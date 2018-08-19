@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="baidu-site-verification" content="9SA7MeFJuT" />
+    
+
+    <title>
+      高性能JavaScript（2） | 全面回忆 | zhangdiweb | zhangdi | hahacoo 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="zhangdi">
+    
+    
+    
+      <meta name="keywords" content="全面回忆,javascript,css">
+    
+
+    <meta name="description" content="在JavaScript中，数据存储的位置对代码的整体性能会有重大影响。数据存储共有4种方式：字面量、变量、数组项、对象成员，它们有着各自特点，访问字面量和局部变量的速度最快，相反访问数组项和对象成员相对较慢。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高性能JavaScript（2） | 全面回忆">
+<meta property="og:url" content="http://zhangdiweb.com/2018/08/19/高性能JavaScript（2）/index.html">
+<meta property="og:site_name" content="全面回忆">
+<meta property="og:description" content="在JavaScript中，数据存储的位置对代码的整体性能会有重大影响。数据存储共有4种方式：字面量、变量、数组项、对象成员，它们有着各自特点，访问字面量和局部变量的速度最快，相反访问数组项和对象成员相对较慢。">
+<meta property="og:updated_time" content="2018-08-19T07:07:48.670Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高性能JavaScript（2） | 全面回忆">
+<meta name="twitter:description" content="在JavaScript中，数据存储的位置对代码的整体性能会有重大影响。数据存储共有4种方式：字面量、变量、数组项、对象成员，它们有着各自特点，访问字面量和局部变量的速度最快，相反访问数组项和对象成员相对较慢。">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">全面回忆</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          张棣
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/hahacoo" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">高性能JavaScript（2）</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2018-08-19" class="post-meta__date date">2018-08-19</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/javascript/">javascript</a>
+            </font>
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>在JavaScript中，数据存储的位置对代码的整体性能会有重大影响。数据存储共有4种方式：字面量、变量、数组项、对象成员，它们有着各自特点，访问字面量和局部变量的速度最快，相反访问数组项和对象成员相对较慢。</p>
+<a id="more"></a>
+<h3 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h3><p>作用域确定了JavaScript中变量的访问范围。一个函数被创建，就创建了一个作用域。函数有一个内部属性<code>[[Scopes]]</code>，其包含了函数被创建的作用域中的对象集合，这个集合就被称为作用域链。作用域链决定了哪些数据能被函数访问。</p>
+<p>任意一个函数被创建，首先插入作用域链一个全局对象，包含<code>window</code>、<code>document</code>等全局变量。在函数执行时，又会创建一个<strong>执行环境</strong>的内部对象，它的作用链初始化为函数的<code>[[Scopes]]</code>中的对象，之后又会创建一个活动对象，该对象包含了所有局部变量，命名参数，以及this，然后此对象被压入作用链的最顶端，当执行结束，该对象也随之销毁。</p>
+<p>函数执行过程中，每遇到一个变量，都会搜索执行环境的作用域链，也正是这个搜索过程影响到了性能。因为链式存储，随着变量在作用域链位置的加深，性能的消耗也就越大。因此不难理解，局部变量的访问速度是最快的，全局变量由于在作用域链的最末端，通常访问最慢。</p>
+<p>因此，对于访问频繁的全局变量，我们可以通过将引用存储在一个局部变量中，使用这个局部变量代替全局变量。</p>
+<h4 id="改变作用域链"><a href="#改变作用域链" class="headerlink" title="改变作用域链"></a>改变作用域链</h4><p>一般情况下，执行环境的作用链是不会改变的，但是有两种情况下可以临时改变。</p>
+<p>第一个是<code>with</code>语句，<code>with</code>语句用来给对象的所有属性创建了一个变量。这时，会创建一个变量对象，包含了指定对象的所有属性。对象被插入作用链顶端，意味着之前的作用域被后移一位，局部变量处于第二个位置，访问的代价更高了。</p>
+<p>第二个是<code>try-catch</code>语句，在发生异常的情况下，会自动跳转到<code>catch</code>子句，然后异常对象推入一个变量对象到作用域链首位。</p>
+<p>不管是<code>witch</code>还是<code>try-catch</code>，还有不在此部分讨论的<code>eval</code>函数，都被认为是动态作用域链。特点就是，动态作用域只存在函数执行过程中，不能被浏览器的静态分析优化（浏览器引擎通过分析代码，确定哪些变量可以在特定时候被访问，希望用标识符索引访问的方式代替作用链查找的哈希表识别方式）。</p>
+<p>综合上述两点，这也就是为什么不鼓励使用<code>with</code>语句的原因。</p>
+<h4 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h4><p>闭包是JavaScript的一个特性，允许函数访问局部作用域之外的数据。闭包会创建一个特定的作用域链，在全局对象之上，<code>[[Scopes]]</code>还包括一个外层函数的活动对象，也可以理解为，闭包的<code>[[Scopes]]</code>被初始化为外层函数的执行环境的作用域链。</p>
+<p>带来的问题就是，由于<code>[[Scopes]]</code>属性包含了与执行环境作用域链相同的对象的引用，因此执行环境中局部变量不会被销毁。另外，当闭包执行时，创建的执行环境作用域链会继续增加一个活动对象到顶端，也就是说在访问外层函数的变量时，需要进行一次查找，带来性能消耗。</p>
+<p>正如文章开头说的，局部变量的访问速度最快，因此我们在编写代码的时候，应该尽可能将对象成员、数组元素、跨域变量存储在一个局部变量中，实现性能的改善。</p>
+
+  </section>
+
+  
+  
+
+<section class="post-comments">
+
+    <div class="ds-thread" data-thread-key="2018/08/19/高性能JavaScript（2）/"></div>
+
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"zhangcom"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script> 
+
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
