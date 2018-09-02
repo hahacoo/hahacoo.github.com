@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="baidu-site-verification" content="9SA7MeFJuT" />
+    
+
+    <title>
+      Mobx与Vue响应式对比 | 全面回忆 | zhangdiweb | zhangdi | hahacoo 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="zhangdi">
+    
+    
+    
+      <meta name="keywords" content="全面回忆,javascript,css">
+    
+
+    <meta name="description" content="Mobx是一个通过透明的函数响应式编程的状态管理库，一提到响应式，首先想到的就是如今响应式编程的代表Vue。两个在响应式的实现都选择了数据劫持的方法，就是将赋值的过程借助函数处理，实现一些额外的操作，比如记录日志，触发回调等等。Vue通过Object.defineProperty，Mobx同样也使用了Object.defineProperty（最新的Mobx5使用了Proxy实现），不同的是Mob">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mobx与Vue响应式对比 | 全面回忆">
+<meta property="og:url" content="http://zhangdiweb.com/2018/09/02/Mobx与Vue响应式对比/index.html">
+<meta property="og:site_name" content="全面回忆">
+<meta property="og:description" content="Mobx是一个通过透明的函数响应式编程的状态管理库，一提到响应式，首先想到的就是如今响应式编程的代表Vue。两个在响应式的实现都选择了数据劫持的方法，就是将赋值的过程借助函数处理，实现一些额外的操作，比如记录日志，触发回调等等。Vue通过Object.defineProperty，Mobx同样也使用了Object.defineProperty（最新的Mobx5使用了Proxy实现），不同的是Mob">
+<meta property="og:image" content="http://zhangdiweb.com/images/Mobx响应数据.png">
+<meta property="og:updated_time" content="2018-09-02T11:30:22.868Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mobx与Vue响应式对比 | 全面回忆">
+<meta name="twitter:description" content="Mobx是一个通过透明的函数响应式编程的状态管理库，一提到响应式，首先想到的就是如今响应式编程的代表Vue。两个在响应式的实现都选择了数据劫持的方法，就是将赋值的过程借助函数处理，实现一些额外的操作，比如记录日志，触发回调等等。Vue通过Object.defineProperty，Mobx同样也使用了Object.defineProperty（最新的Mobx5使用了Proxy实现），不同的是Mob">
+<meta name="twitter:image" content="http://zhangdiweb.com/images/Mobx响应数据.png">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">全面回忆</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          张棣
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/hahacoo" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">Mobx与Vue响应式对比</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2018-09-02" class="post-meta__date date">2018-09-02</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/javascript/">javascript</a>
+            </font>
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/Mobx/">Mobx</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>Mobx是一个通过透明的函数响应式编程的状态管理库，一提到响应式，首先想到的就是如今响应式编程的代表Vue。两个在响应式的实现都选择了数据劫持的方法，就是将赋值的过程借助函数处理，实现一些额外的操作，比如记录日志，触发回调等等。Vue通过<code>Object.defineProperty</code>，Mobx同样也使用了<code>Object.defineProperty</code>（最新的Mobx5使用了<code>Proxy</code>实现），不同的是Mobx在这里只是用作创建代理对象，真正的响应式实现在<code>observable</code>实例上。</p>
+<a id="more"></a>
+<p>以下分析涉及代码为mobx4版本。</p>
+<h3 id="响应式数据"><a href="#响应式数据" class="headerlink" title="响应式数据"></a>响应式数据</h3><p>Mobx中，将响应式数据按类型可以分为，基本类型，Object，Array，Map。Object，Array，Map都是在基本类型的基础上的递归实现。其中几个关键类，<code>ObservableValue</code>继承自Atom类，是基本类型的响应式实现，提供了set/get方法。ObservableObjectAdministration实例作为代理，能将基本数据类型的赋值动作转变成响应式，提供了write/read方法，Mobx在对象上创建了一个ObservableObjectAdministration的实例<code>$mobx</code>代理，减少了对源数据的污染，通过<code>Object.defineProperty</code>，将对象的操作，委托给代理。ObservableArrayAdministration 实例能处理数组；ObservableMap 实例能处理 map 数据结构。</p>
+<p><img src="http://zhangdiweb.com/images/Mobx响应数据.png" alt="前端知识图谱"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// .api/observable.ts</span></div><div class="line"></div><div class="line"><span class="comment">// mobx提供的公共api</span></div><div class="line"><span class="keyword">const</span> observableFactories: IObservableFactories = &#123;</div><div class="line">    box&lt;T&gt;(value?: T, options?: CreateObservableOptions): IObservableValue&lt;T&gt; &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ObservableValue(value, getEnhancerFromOptions(o), o.name)</div><div class="line">    &#125;,</div><div class="line">    shallowBox&lt;T&gt;(value?: T, name?: string): IObservableValue&lt;T&gt; &#123;</div><div class="line">        <span class="keyword">return</span> observable.box(value, &#123; name, deep: <span class="literal">false</span> &#125;)</div><div class="line">    &#125;,</div><div class="line">    array&lt;T&gt;(initialValues?: T[], options?: CreateObservableOptions): IObservableArray&lt;T&gt; &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ObservableArray(initialValues, getEnhancerFromOptions(o), o.name) <span class="keyword">as</span> any</div><div class="line">    &#125;,</div><div class="line">    shallowArray&lt;T&gt;(initialValues?: T[], name?: string): IObservableArray&lt;T&gt; &#123;</div><div class="line">        <span class="keyword">return</span> observable.array(initialValues, &#123; name, deep: <span class="literal">false</span> &#125;)</div><div class="line">    &#125;,</div><div class="line">    map&lt;K, V&gt;(</div><div class="line">        initialValues?: IObservableMapInitialValues&lt;K, V&gt;,</div><div class="line">        options?: CreateObservableOptions</div><div class="line">    ): ObservableMap&lt;K, V&gt; &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ObservableMap&lt;K, V&gt;(initialValues, getEnhancerFromOptions(o), o.name)</div><div class="line">    &#125;,</div><div class="line">    shallowMap&lt;K, V&gt;(</div><div class="line">        initialValues?: IObservableMapInitialValues&lt;K, V&gt;,</div><div class="line">        name?: string</div><div class="line">    ): ObservableMap&lt;K, V&gt; &#123;</div><div class="line">        <span class="keyword">return</span> observable.map(initialValues, &#123; name, deep: <span class="literal">false</span> &#125;)</div><div class="line">    &#125;,</div><div class="line">    object&lt;T&gt;(</div><div class="line">        props: T,</div><div class="line">        decorators?: &#123; [K <span class="keyword">in</span> keyof T]: <span class="built_in">Function</span> &#125;,</div><div class="line">        options?: CreateObservableOptions</div><div class="line">    ): T &amp; IObservableObject &#123;</div><div class="line">        <span class="keyword">return</span> extendObservable(&#123;&#125;, props, decorators, o) <span class="keyword">as</span> any</div><div class="line">    &#125;,</div><div class="line">    shallowObject&lt;T&gt;(props: T, name?: string): T &amp; IObservableObject &#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">arguments</span>[<span class="number">1</span>] === <span class="string">"string"</span>) incorrectlyUsedAsDecorator(<span class="string">"shallowObject"</span>)</div><div class="line">        deprecated(<span class="string">`observable.shallowObject`</span>, <span class="string">`observable.object(values, &#123;&#125;, &#123; deep: false &#125;)`</span>)</div><div class="line">        <span class="keyword">return</span> observable.object(props, &#123;&#125;, &#123; name, deep: <span class="literal">false</span> &#125;)</div><div class="line">    &#125;</div><div class="line">&#125; <span class="keyword">as</span> any</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ./types/observablevalue.ts</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">ObservableValue</span>&lt;<span class="title">T</span>&gt; <span class="keyword">extends</span> <span class="title">Atom</span></span></div><div class="line">    <span class="title">implements</span> <span class="title">IObservableValue</span>&lt;<span class="title">T</span>&gt;, <span class="title">IInterceptable</span>&lt;<span class="title">IValueWillChange</span>&lt;<span class="title">T</span>&gt;&gt;, <span class="title">IListenable</span> &#123;</div><div class="line">    hasUnreportedChange = <span class="literal">false</span></div><div class="line">    interceptors</div><div class="line">    changeListeners</div><div class="line">    value</div><div class="line">    dehancer: any</div><div class="line"></div><div class="line">    public set(newValue: T) &#123;</div><div class="line">        <span class="keyword">const</span> oldValue = <span class="keyword">this</span>.value</div><div class="line">        newValue = <span class="keyword">this</span>.prepareNewValue(newValue) <span class="keyword">as</span> any</div><div class="line">        <span class="keyword">if</span> (newValue !== UNCHANGED) &#123;</div><div class="line">            <span class="keyword">const</span> notifySpy = isSpyEnabled()</div><div class="line">            <span class="keyword">if</span> (notifySpy) &#123;</div><div class="line">                spyReportStart(&#123;</div><div class="line">                    type: <span class="string">"update"</span>,</div><div class="line">                    name: <span class="keyword">this</span>.name,</div><div class="line">                    newValue,</div><div class="line">                    oldValue</div><div class="line">                &#125;)</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">this</span>.setNewValue(newValue)</div><div class="line">            <span class="keyword">if</span> (notifySpy) spyReportEnd()</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private prepareNewValue(newValue): T | IUNCHANGED &#123;</div><div class="line">        checkIfStateModificationsAreAllowed(<span class="keyword">this</span>)</div><div class="line">        <span class="keyword">if</span> (hasInterceptors(<span class="keyword">this</span>)) &#123;</div><div class="line">            <span class="keyword">const</span> change = interceptChange&lt;IValueWillChange&lt;T&gt;&gt;(<span class="keyword">this</span>, &#123;</div><div class="line">                object: <span class="keyword">this</span>,</div><div class="line">                type: <span class="string">"update"</span>,</div><div class="line">                newValue</div><div class="line">            &#125;)</div><div class="line">            <span class="keyword">if</span> (!change) <span class="keyword">return</span> UNCHANGED</div><div class="line">            newValue = change.newValue</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// apply modifier</span></div><div class="line">        newValue = <span class="keyword">this</span>.enhancer(newValue, <span class="keyword">this</span>.value, <span class="keyword">this</span>.name)</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.value !== newValue ? newValue : UNCHANGED</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    setNewValue(newValue: T) &#123;</div><div class="line">        <span class="keyword">const</span> oldValue = <span class="keyword">this</span>.value</div><div class="line">        <span class="keyword">this</span>.value = newValue</div><div class="line">      </div><div class="line">        <span class="comment">// 通知变化</span></div><div class="line">        <span class="keyword">this</span>.reportChanged()</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public get(): T &#123;</div><div class="line">      </div><div class="line">        <span class="comment">// 收集依赖</span></div><div class="line">        <span class="keyword">this</span>.reportObserved()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ./types/observableobject.ts</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">addHiddenFinalProp</span>(<span class="params">object: any, propName: string, value: any</span>) </span>&#123;</div><div class="line">    <span class="built_in">Object</span>.defineProperty(object, propName, &#123;</div><div class="line">        enumerable: <span class="literal">false</span>,</div><div class="line">        writable: <span class="literal">false</span>,</div><div class="line">        configurable: <span class="literal">true</span>,</div><div class="line">        value</div><div class="line">    &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">ObservableObjectAdministration</span></span></div><div class="line">    <span class="title">implements</span> <span class="title">IInterceptable</span>&lt;<span class="title">IObjectWillChange</span>&gt;, <span class="title">IListenable</span> &#123;</div><div class="line">    values: &#123; [key: string]: ObservableValue&lt;any&gt; | ComputedValue&lt;any&gt; &#125; = &#123;&#125;</div><div class="line">    keys: <span class="literal">undefined</span> | IObservableArray&lt;string&gt;</div><div class="line">    changeListeners</div><div class="line">    interceptors</div><div class="line"></div><div class="line">    <span class="keyword">constructor</span>(public target: any, public name: string, public defaultEnhancer: IEnhancer&lt;any&gt;) &#123;&#125;</div><div class="line"></div><div class="line">    read(owner: any, key: string) &#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.target !== owner) &#123;</div><div class="line">            <span class="keyword">this</span>.illegalAccess(owner, key)</div><div class="line">            <span class="keyword">return</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.values[key].get()</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    write(owner: any, key: string, newValue) &#123;</div><div class="line">        <span class="keyword">const</span> instance = <span class="keyword">this</span>.target</div><div class="line">        <span class="keyword">const</span> observable = <span class="keyword">this</span>.values[key]</div><div class="line">        </div><div class="line">        newValue = (observable <span class="keyword">as</span> any).prepareNewValue(newValue)</div><div class="line">        <span class="keyword">if</span> (newValue !== UNCHANGED) &#123;</div><div class="line">            <span class="keyword">const</span> notify = hasListeners(<span class="keyword">this</span>)</div><div class="line">            <span class="keyword">const</span> notifySpy = isSpyEnabled()</div><div class="line">            <span class="keyword">const</span> change =</div><div class="line">                notify || notifySpy</div><div class="line">                    ? &#123;</div><div class="line">                          type: <span class="string">"update"</span>,</div><div class="line">                          object: instance,</div><div class="line">                          oldValue: (observable <span class="keyword">as</span> any).value,</div><div class="line">                          name: key,</div><div class="line">                          newValue</div><div class="line">                      &#125;</div><div class="line">                    : <span class="literal">null</span></div><div class="line"></div><div class="line">            <span class="keyword">if</span> (notifySpy) spyReportStart(&#123; ...change, name: <span class="keyword">this</span>.name, key &#125;)</div><div class="line">            ;(observable <span class="keyword">as</span> ObservableValue&lt;any&gt;).setNewValue(newValue)</div><div class="line">            <span class="keyword">if</span> (notify) notifyListeners(<span class="keyword">this</span>, change)</div><div class="line">            <span class="keyword">if</span> (notifySpy) spyReportEnd()</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">asObservableObject</span>(<span class="params"></span></span></div><div class="line">    target,</div><div class="line">    name: string = "",</div><div class="line">    defaultEnhancer: IEnhancer&lt;any&gt; = deepEnhancer</div><div class="line">): <span class="title">ObservableObjectAdministration</span> &#123;</div><div class="line">    <span class="keyword">let</span> adm = (target <span class="keyword">as</span> any).$mobx</div><div class="line">    <span class="keyword">if</span> (adm) <span class="keyword">return</span> adm</div><div class="line"></div><div class="line">    adm = <span class="keyword">new</span> ObservableObjectAdministration(target, name, defaultEnhancer)</div><div class="line">    addHiddenFinalProp(target, <span class="string">"$mobx"</span>, adm)</div><div class="line">    <span class="keyword">return</span> adm</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">generateObservablePropConfig</span>(<span class="params">propName</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> (</div><div class="line">        observablePropertyConfigs[propName] ||</div><div class="line">        (observablePropertyConfigs[propName] = &#123;</div><div class="line">            configurable: <span class="literal">true</span>,</div><div class="line">            enumerable: <span class="literal">true</span>,</div><div class="line">            get() &#123;</div><div class="line">                <span class="keyword">return</span> <span class="keyword">this</span>.$mobx.read(<span class="keyword">this</span>, propName)</div><div class="line">            &#125;,</div><div class="line">            set(v) &#123;</div><div class="line">                <span class="keyword">this</span>.$mobx.write(<span class="keyword">this</span>, propName, v)</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">    )</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>数组和Map的具体实现就不在这里介绍，具体可到源码中查看。</p>
+<h3 id="运行机制"><a href="#运行机制" class="headerlink" title="运行机制"></a>运行机制</h3><p>在严格模式下Mobx的一次响应式过程包括，从执行动作 action 促使响应式数据 observable 变化，再到衍生 derivation 执行的整个过程。</p>
+<ol>
+<li>observable: 响应式数据。</li>
+<li>derivation: 衍生，响应式数据变更后执行的副作用函数，包含计算属性、反应，可以类比Vue中的watch。</li>
+<li>action: 动作，由其促使响应式数据发生变更。<code>action</code>的意义在于，使用事务封装执行动作，将一组响应式数据变更复合为一，等到这组响应式数据变更完结后，才执行 derivation。</li>
+</ol>
+<h4 id="observable"><a href="#observable" class="headerlink" title="observable"></a>observable</h4><p>继承自<code>Atom</code>类额外增加了<code>reportObserve</code>，<code>reportChanged</code>方法。<code>reportObserve</code>注册依赖，即当<code>observable</code>被观察时，类比Vue中<code>depend</code>；当<code>observable</code>数据变更时，会调用<code>reportChanged</code>方法，类比Vue中<code>notify</code>。</p>
+<h4 id="derivation"><a href="#derivation" class="headerlink" title="derivation"></a>derivation</h4><p><code>derivation</code>即消费<code>observable</code>的观察者，在 mobx 实现中，observable, derivation 相互持有彼此的引用，当观察数据变更时，<code>derivation</code>将执行。</p>
+<h4 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h4><p>在Vue中，注册的回调函数执行是通过内部的异步队列控制的，避免不必要的性能损耗，Mobx则通过事务管理更新操作。Mobx默认更新是同步的，<code>obserable</code>一旦发生变化，<code>derivation</code>就会执行。如果要是希望通线程中更新操作只触发一次，那直接使用<code>action</code>，将操作包裹起来就行，而实现的核心就是事务的运用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//./core/atom.ts</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">AtomImpl</span> <span class="title">implements</span> <span class="title">IAtom</span> </span>&#123;</div><div class="line">  public reportChanged() &#123;</div><div class="line">    startBatch()</div><div class="line">    propagateChanged(<span class="keyword">this</span>)</div><div class="line">    endBatch()</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//./core/observable.ts</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 开启事务</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">startBatch</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  globalState.inBatch++</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 结束事务</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">endBatch</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (--globalState.inBatch === <span class="number">0</span>) &#123;</div><div class="line">    runReactions()</div><div class="line">    <span class="keyword">const</span> list = globalState.pendingUnobservations</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; list.length; i++) &#123;</div><div class="line">      <span class="keyword">const</span> observable = list[i]</div><div class="line">      observable.isPendingUnobservation = <span class="literal">false</span></div><div class="line">      <span class="keyword">if</span> (observable.observers.size === <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">if</span> (observable.isBeingObserved) &#123;</div><div class="line">          observable.isBeingObserved = <span class="literal">false</span></div><div class="line">          observable.onBecomeUnobserved()</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (observable <span class="keyword">instanceof</span> ComputedValue) &#123;</div><div class="line">          observable.suspend()</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    globalState.pendingUnobservations = []</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 将derivation加入队列</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">propagateChanged</span>(<span class="params">observable: IObservable</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (observable.lowestObserverState === IDerivationState.STALE) <span class="keyword">return</span></div><div class="line">  observable.lowestObserverState = IDerivationState.STALE</div><div class="line"></div><div class="line">  observable.observers.forEach(d =&gt; &#123;</div><div class="line">    <span class="keyword">if</span> (d.dependenciesState === IDerivationState.UP_TO_DATE) &#123;</div><div class="line">      d.onBecomeStale()</div><div class="line">    &#125;</div><div class="line">    d.dependenciesState = IDerivationState.STALE</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">propagateMaybeChanged</span>(<span class="params">observable: IObservable</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (observable.lowestObserverState !== IDerivationState.UP_TO_DATE) <span class="keyword">return</span></div><div class="line">  observable.lowestObserverState = IDerivationState.POSSIBLY_STALE</div><div class="line"></div><div class="line">  observable.observers.forEach(d =&gt; &#123;</div><div class="line">    <span class="keyword">if</span> (d.dependenciesState === IDerivationState.UP_TO_DATE) &#123;</div><div class="line">      d.dependenciesState = IDerivationState.POSSIBLY_STALE</div><div class="line">      d.onBecomeStale()</div><div class="line">    &#125;</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//./core/action.ts</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createAction</span>(<span class="params">actionName: string, fn: Function</span>): <span class="title">Function</span> &amp; <span class="title">IAction</span> </span>&#123;</div><div class="line">    <span class="keyword">const</span> res = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> executeAction(actionName, fn, <span class="keyword">this</span>, <span class="built_in">arguments</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">executeAction</span>(<span class="params">actionName: string, fn: Function, scope?: any, args?: IArguments</span>) </span>&#123;</div><div class="line">    <span class="keyword">const</span> runInfo = startAction(actionName, fn, scope, args)</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="keyword">return</span> fn.apply(scope, args)</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">        endAction(runInfo)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">startAction</span>(<span class="params"></span></span></div><div class="line">    actionName: string,</div><div class="line">    fn: Function,</div><div class="line">    scope: any,</div><div class="line">    args?: IArguments</div><div class="line">): <span class="title">IActionRunInfo</span> &#123;</div><div class="line">    <span class="keyword">const</span> prevDerivation = untrackedStart()</div><div class="line">    startBatch() <span class="comment">// 开启事务</span></div><div class="line">    <span class="keyword">const</span> prevAllowStateChanges = allowStateChangesStart(<span class="literal">true</span>)</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        prevDerivation,</div><div class="line">        prevAllowStateChanges,</div><div class="line">        notifySpy,</div><div class="line">        startTime</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">endAction</span>(<span class="params">runInfo: IActionRunInfo</span>) </span>&#123;</div><div class="line">    allowStateChangesEnd(runInfo.prevAllowStateChanges)</div><div class="line">    endBatch() <span class="comment">// 关闭事务</span></div><div class="line">    untrackedEnd(runInfo.prevDerivation)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Mobx中的事务通过 globalState.inBatch 计数器标识：<code>startBatch</code>阶段，<code>globalState.inBatch</code>加 1；<code>endBatch</code>阶段，<code>globalState.inBatch</code>减 1；当<code>globalState.inBatch</code>为 0 时，表示单个事务周期结束，事务的意义就在于将并行的响应式数据变更视为一组，在一组变更完成之后，才执行相应的衍生，这样就保证了同步更新，但衍生只执行一次。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>除了上述提到的响应式实现不同，Mobx和Vue在响应数据和衍生的绑定关系上也不一样。在Vue中，衍生只用三种，<code>computed</code>，<code>watch</code>以及<code>render</code>。而Mobx种提供了<code>computed</code>，<code>autorun</code>，<code>when</code>,<code>reaction</code>和<code>observer</code>。由于在Vue中响应式只是他的一部分，需要配合组件系统使用，所以数据和衍生的绑定是在内部实现的，可以理解成自动绑定依赖。Mobx提供了更加细粒度的调用，因此绑定的建立也更严格，需要满足：</p>
+<ul>
+<li><strong>“读取”</strong> 是对象属性的间接引用，可以用过 <code>.</code>或者 <code>[]</code>的形式完成。</li>
+<li><strong>“追踪函数”</strong> 是 <code>computed</code> 表达式、observer 组件的 <code>render()</code> 方法和 <code>when</code>、<code>reaction</code> 和 <code>autorun</code> 的第一个入参函数。</li>
+<li><strong>“过程(during)”</strong> 意味着只追踪那些在函数执行时被读取的 observable 。这些值是否由追踪函数直接或间接使用并不重要。</li>
+</ul>
+
+  </section>
+
+  
+  
+
+<section class="post-comments">
+
+    <div class="ds-thread" data-thread-key="2018/09/02/Mobx与Vue响应式对比/"></div>
+
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"zhangcom"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script> 
+
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
