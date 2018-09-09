@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="baidu-site-verification" content="9SA7MeFJuT" />
+    
+
+    <title>
+      高性能JavaScript（3） | 全面回忆 | zhangdiweb | zhangdi | hahacoo 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="zhangdi">
+    
+    
+    
+      <meta name="keywords" content="全面回忆,javascript,css">
+    
+
+    <meta name="description" content="DOM是一个独立于语言的，用于操作XML和HTML文档的程序接口，尽管DOM是个独立语言的API，但它在浏览器中的接口却是用JavaScript实现的。浏览器通常会把DOM和JavaScript独立实现，例如Chrome的DOM渲染使用的WebKit来实现的，但JavaScript引擎使用的是V8。由于是两个相互独立的功能，两者之间通过接口连接，因此在JavaScript中访问DOM就会产生消耗，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高性能JavaScript（3） | 全面回忆">
+<meta property="og:url" content="http://zhangdiweb.com/2018/09/09/高性能JavaScript（3）/index.html">
+<meta property="og:site_name" content="全面回忆">
+<meta property="og:description" content="DOM是一个独立于语言的，用于操作XML和HTML文档的程序接口，尽管DOM是个独立语言的API，但它在浏览器中的接口却是用JavaScript实现的。浏览器通常会把DOM和JavaScript独立实现，例如Chrome的DOM渲染使用的WebKit来实现的，但JavaScript引擎使用的是V8。由于是两个相互独立的功能，两者之间通过接口连接，因此在JavaScript中访问DOM就会产生消耗，">
+<meta property="og:updated_time" content="2018-09-09T09:46:15.416Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高性能JavaScript（3） | 全面回忆">
+<meta name="twitter:description" content="DOM是一个独立于语言的，用于操作XML和HTML文档的程序接口，尽管DOM是个独立语言的API，但它在浏览器中的接口却是用JavaScript实现的。浏览器通常会把DOM和JavaScript独立实现，例如Chrome的DOM渲染使用的WebKit来实现的，但JavaScript引擎使用的是V8。由于是两个相互独立的功能，两者之间通过接口连接，因此在JavaScript中访问DOM就会产生消耗，">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">全面回忆</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          张棣
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/hahacoo" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">高性能JavaScript（3）</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2018-09-09" class="post-meta__date date">2018-09-09</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/javascriptnm/">javascriptnm</a>
+            </font>
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>DOM是一个独立于语言的，用于操作XML和HTML文档的程序接口，尽管DOM是个独立语言的API，但它在浏览器中的接口却是用JavaScript实现的。浏览器通常会把DOM和JavaScript独立实现，例如Chrome的DOM渲染使用的WebKit来实现的，但JavaScript引擎使用的是V8。由于是两个相互独立的功能，两者之间通过接口连接，因此在JavaScript中访问DOM就会产生消耗，天生就慢。</p>
+<a id="more"></a>
+<h3 id="重绘与重排"><a href="#重绘与重排" class="headerlink" title="重绘与重排"></a>重绘与重排</h3><p>浏览器中存在两个数据接口：</p>
+<ul>
+<li>DOM树</li>
+</ul>
+<p>页面结构</p>
+<ul>
+<li>渲染树</li>
+</ul>
+<p>表示DOM树的显示</p>
+<p>一旦DOM和渲染树构建完成，浏览器就开始绘制。当DOM的变化影响了元素的几何属性，浏览器需要重新计算元素的几何属性，同时其他元素的几何属性和位置也会受到影响。这是浏览器会发生“<strong>重排</strong>”，重新构建渲染树，重排之后，浏览器将重新绘制受到影响的部分到屏幕上，称为“<strong>重绘</strong>”。</p>
+<p>不是所有的DOM变化都会导致重排，例如改变元素的背景色，这种情况下只会发生一次重绘。</p>
+<p>导致重排的因素：</p>
+<ul>
+<li>元素的显隐</li>
+<li>元素位置的改变</li>
+<li>元素尺寸的改变（内外边距，边框宽度，高度宽度）</li>
+<li>元素内容改变</li>
+<li>页面初始化</li>
+<li>浏览器窗口尺寸的改变</li>
+</ul>
+<h4 id="优化重排和重绘"><a href="#优化重排和重绘" class="headerlink" title="优化重排和重绘"></a>优化重排和重绘</h4><p><strong>合并样式修改</strong></p>
+<p>较慢</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> el = <span class="built_in">document</span>.getElementById(<span class="string">'div'</span>)</div><div class="line">el.style.borderLeft = <span class="string">'1px'</span></div><div class="line">el.style.borderRight = <span class="string">'2px'</span></div></pre></td></tr></table></figure>
+<p>优化</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> el = <span class="built_in">document</span>.getElementById(<span class="string">'div'</span>)</div><div class="line">el.style.cssText += <span class="string">';border-left: 1px; border-right: 2px'</span></div></pre></td></tr></table></figure>
+<p>或者通过改变class</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> el = <span class="built_in">document</span>.getElementById(<span class="string">'div'</span>)</div><div class="line">el.className = <span class="string">'change'</span></div></pre></td></tr></table></figure>
+<p><strong>批量修改DOM</strong></p>
+<p>批量修改DOM的通用步骤：</p>
+<ol>
+<li>元素脱离文档</li>
+<li>进行修改</li>
+<li>插入文档</li>
+</ol>
+<p>例如存在如下DOM结构</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>aaa<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>bbb<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>现要根据数据渲染li结构，以下是修改li节点的函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">renderList</span>(<span class="params">parentNode, data</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> li</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; data.length; i++) &#123;</div><div class="line">      	li = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>)</div><div class="line">      	<span class="comment">// 根据数据生成li内容</span></div><div class="line">      	...</div><div class="line">        parentNode.appendChild(li)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>较慢</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> data = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div><div class="line"><span class="keyword">var</span> ul = <span class="built_in">document</span>.getElementById(<span class="string">'ul'</span>)</div><div class="line">renderList(ul, data)</div></pre></td></tr></table></figure>
+<p>使用上述方法，每次插入一个li都会导致重排，我们可以按之前的通用方式进行优化</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> data = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div><div class="line"><span class="keyword">var</span> ul = <span class="built_in">document</span>.getElementById(<span class="string">'ul'</span>)</div><div class="line">ul.style.display = <span class="string">'none'</span></div><div class="line">renderList(ul, data)</div><div class="line">ul.style.display = <span class="string">'block'</span></div></pre></td></tr></table></figure>
+<p>或者通过创建代码片段进行优化</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> data = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div><div class="line"><span class="keyword">var</span> ul = <span class="built_in">document</span>.getElementById(<span class="string">'ul'</span>)</div><div class="line"><span class="keyword">var</span> fragment = <span class="built_in">document</span>.createDocumentFragment()</div><div class="line">renderList(fragment, data)</div><div class="line">ul.appendChild(fragment)</div></pre></td></tr></table></figure>
+<p><strong>元素脱离动画流</strong></p>
+<p><strong>事件委托</strong></p>
+<p>基于事件的冒泡机制，在父级节点绑定处理器，处理子元素的事件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> parent = <span class="built_in">document</span>.getElementById(<span class="string">'parent'</span>)</div><div class="line">parent.onclick = <span class="function"><span class="keyword">function</span>(<span class="params">evt</span>) </span>&#123;</div><div class="line">    evt = evt || <span class="built_in">window</span>.event</div><div class="line">  	<span class="keyword">var</span> target = evt.target || evt.srcElement <span class="comment">// 实际触发的元素</span></div><div class="line">    </div><div class="line">    <span class="comment">// 判断元素，执行事件处理过程</span></div><div class="line">    ...</div><div class="line">    </div><div class="line">    if (<span class="keyword">typeof</span> evt.preventDefault === <span class="string">'function'</span>) &#123;</div><div class="line">        evt.preventDefault()</div><div class="line">      	evt.stopPropagetion()</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        evt.returnValue = <span class="literal">false</span></div><div class="line">        evt.cancelBubble = <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+  </section>
+
+  
+  
+
+<section class="post-comments">
+
+    <div class="ds-thread" data-thread-key="2018/09/09/高性能JavaScript（3）/"></div>
+
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"zhangcom"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script> 
+
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
