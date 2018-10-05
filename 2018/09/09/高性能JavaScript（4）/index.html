@@ -19,16 +19,16 @@
       <meta name="keywords" content="全面回忆,javascript,css">
     
 
-    <meta name="description" content="技术分享、作品展示、知识积累">
+    <meta name="description" content="JavaScript和其他编程语言一样，写法和算法会影响运行时间，代码数量少并不代表运行速度就快，代码数量多也不一定会影响运行速度。代码的整体结构才是影响运行速度的主要因素之一。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="高性能JavaScript（4） | 全面回忆">
 <meta property="og:url" content="http://zhangdiweb.com/2018/09/09/高性能JavaScript（4）/index.html">
 <meta property="og:site_name" content="全面回忆">
-<meta property="og:description" content="技术分享、作品展示、知识积累">
-<meta property="og:updated_time" content="2018-09-09T10:01:52.205Z">
+<meta property="og:description" content="JavaScript和其他编程语言一样，写法和算法会影响运行时间，代码数量少并不代表运行速度就快，代码数量多也不一定会影响运行速度。代码的整体结构才是影响运行速度的主要因素之一。">
+<meta property="og:updated_time" content="2018-10-05T07:28:01.203Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高性能JavaScript（4） | 全面回忆">
-<meta name="twitter:description" content="技术分享、作品展示、知识积累">
+<meta name="twitter:description" content="JavaScript和其他编程语言一样，写法和算法会影响运行时间，代码数量少并不代表运行速度就快，代码数量多也不一定会影响运行速度。代码的整体结构才是影响运行速度的主要因素之一。">
     
     
     
@@ -203,6 +203,11 @@ classes that you can use:
       <span class="post-meta__tags tags">
 
           
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/javascript/">javascript</a>
+            </font>
+          
 
           
 
@@ -214,7 +219,38 @@ classes that you can use:
   </header>
 
   <section id="post-content" class="article-content post">
-    
+    <p>JavaScript和其他编程语言一样，写法和算法会影响运行时间，代码数量少并不代表运行速度就快，代码数量多也不一定会影响运行速度。代码的整体结构才是影响运行速度的主要因素之一。</p>
+<a id="more"></a>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><p>在大多数编程语言中，循环被认为是最费时间的，因此也是改善性能的关键点之一。</p>
+<p>JavaScript中的几种循环类型：</p>
+<ul>
+<li>for循环</li>
+<li>while循环</li>
+<li>do-while循环</li>
+<li>for-in循环</li>
+</ul>
+<p>这些循环类型中，for-in的效率明显最低，因为每次迭代都会搜索实例或原型属性，产生了更多开销。因此，对于一个未知属性数量的对象进行迭代可以采用for-in，但是其他情况下应该尽量避免，采用其他类型。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> props = [<span class="string">'name'</span>, <span class="string">'address'</span>], i = <span class="number">0</span></div><div class="line"></div><div class="line"><span class="keyword">while</span> (i &lt; props.length) &#123;</div><div class="line">    process(obj[props[i++]])</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 原始循环</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; items.length; i++) &#123;</div><div class="line">  process(items[i])</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>根据之前说过的作用域查找规则，局部变量远比属性查找快的多，将<code>length</code>的属性值存储到局部变量，一次循环只访问了一次属性，从而提高运行速度。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 优化属性查找</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = items.length; i &lt; len; i++) &#123;</div><div class="line">  process(items[i])</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通常情况下，数组的查找顺序和执行任务无关，因此可以采用倒序的方式提高新能。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 优化属性查找并倒序</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = items.length; i--;) &#123;</div><div class="line">  process(items[i])</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>相比减少属性访问，将减法操作合并到了控制条件中，控制条件已经从两次比较（迭代次数是否小于总数？是否为true？）变为一次比较（是否为true？），从而进一步提高运行速度。</p>
+<h3 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h3><p>JavaScript中的控制语句类型：</p>
+<ul>
+<li>if-else</li>
+<li>switch</li>
+</ul>
+<p>一般情况下，会从代码易读性来做取舍。根据条件数量来判断：条件数量越大，使用switch，否则使用if-else。</p>
+<h4 id="优化-1"><a href="#优化-1" class="headerlink" title="优化"></a>优化</h4><p><strong>if-else</strong></p>
+<p>if-else中的条件语句顺序应该按照从最大概率到最小概率的顺序排列，最可能出现的应该放在首位，达到优化速度的目的。</p>
+<p>另一种优化则是将多个判断语句变成嵌套的if-else语句，实际是利用了二分法，分为不同区间，然后逐步缩小范围。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 原始</span></div><div class="line"><span class="keyword">if</span> (value === <span class="number">0</span>) &#123;</div><div class="line">    <span class="keyword">return</span> result0</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (value === <span class="number">1</span>) &#123;</div><div class="line">  	<span class="keyword">return</span> result1</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (value === <span class="number">2</span>) &#123;</div><div class="line">  	<span class="keyword">return</span> result2</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (value === <span class="number">3</span>) &#123;</div><div class="line">  	<span class="keyword">return</span> result3</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (value === <span class="number">4</span>) &#123;</div><div class="line">  	<span class="keyword">return</span> result4</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (value === <span class="number">5</span>) &#123;</div><div class="line">  	<span class="keyword">return</span> result5</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (value === <span class="number">6</span>) &#123;</div><div class="line">  	<span class="keyword">return</span> result6</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">  	<span class="keyword">return</span> result7</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 优化后</span></div><div class="line"><span class="keyword">if</span> (value &lt; <span class="number">4</span>) &#123;</div><div class="line">    <span class="keyword">if</span> (value &lt; <span class="number">2</span>) &#123;</div><div class="line">        <span class="keyword">if</span> (value === <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">return</span> result0</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> result1</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">if</span> (value === <span class="number">2</span>) &#123;</div><div class="line">            <span class="keyword">return</span> result2</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> result3</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">if</span> (value &lt; <span class="number">6</span>) &#123;</div><div class="line">        <span class="keyword">if</span> (value === <span class="number">4</span>) &#123;</div><div class="line">            <span class="keyword">return</span> result4</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> result5</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">if</span> (value === <span class="number">6</span>) &#123;</div><div class="line">            <span class="keyword">return</span> result6</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> result7</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>查找表</strong></p>
+<p>当单个键和单个值之间存在逻辑关系，就像上文提到的例子，我们可以通过查找表，用一个数组作为查找表，代替条件语句，提高运行速度。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var results = [ result0, result1, result2, result3, result4, result5, result6, result7]</div><div class="line"></div><div class="line">return results[value]</div></pre></td></tr></table></figure>
+
   </section>
 
   
