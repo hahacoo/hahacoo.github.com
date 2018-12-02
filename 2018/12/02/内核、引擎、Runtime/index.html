@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="baidu-site-verification" content="9SA7MeFJuT" />
+    
+
+    <title>
+      内核、引擎、Runtime | 全面回忆 | zhangdiweb | zhangdi | hahacoo 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="zhangdi">
+    
+    
+    
+      <meta name="keywords" content="全面回忆,javascript,css">
+    
+
+    <meta name="description" content="个人理解浏览器内核可以分为两部分：渲染引擎（RenderEngine）和JS引擎。渲染引擎主要负责页面内容显示内容，JS引擎则是ECMAScript的实现，解释执行JavaScript语言。平时我们所说的内核应该主要指的是渲染引擎，常见分为四种：Trident（IE），Gecko（Firefox），Blink（Chrome)，Webkit（Safari)。内核的不同，最后浏览器渲染效果也不相同。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内核、引擎、Runtime | 全面回忆">
+<meta property="og:url" content="http://zhangdiweb.com/2018/12/02/内核、引擎、Runtime/index.html">
+<meta property="og:site_name" content="全面回忆">
+<meta property="og:description" content="个人理解浏览器内核可以分为两部分：渲染引擎（RenderEngine）和JS引擎。渲染引擎主要负责页面内容显示内容，JS引擎则是ECMAScript的实现，解释执行JavaScript语言。平时我们所说的内核应该主要指的是渲染引擎，常见分为四种：Trident（IE），Gecko（Firefox），Blink（Chrome)，Webkit（Safari)。内核的不同，最后浏览器渲染效果也不相同。">
+<meta property="og:updated_time" content="2018-12-02T11:06:24.218Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="内核、引擎、Runtime | 全面回忆">
+<meta name="twitter:description" content="个人理解浏览器内核可以分为两部分：渲染引擎（RenderEngine）和JS引擎。渲染引擎主要负责页面内容显示内容，JS引擎则是ECMAScript的实现，解释执行JavaScript语言。平时我们所说的内核应该主要指的是渲染引擎，常见分为四种：Trident（IE），Gecko（Firefox），Blink（Chrome)，Webkit（Safari)。内核的不同，最后浏览器渲染效果也不相同。">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">全面回忆</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          张棣
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+<nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+    
+      <!-- Github -->
+      <li class="navigation__item">
+        <a href="https://github.com/hahacoo" title="Huno on GitHub">
+          <i class='icon icon-social-github'></i>
+          <span class="label">GitHub</span>
+        </a>
+      </li>
+    
+
+    <!-- China social icon -->
+    <!--
+    
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-douban'></i>
+          <span class="label">Douban</span>
+        </a>
+      </li>
+
+      <li class="navigation__item">
+        <a href="" title="">
+          <i class='icon cs-icon-weibo'></i>
+          <span class="label">Weibo</span>
+        </a>
+      </li>
+
+    -->
+
+
+
+  </ul>
+</nav>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">内核、引擎、Runtime</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2018-12-02" class="post-meta__date date">2018-12-02</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>个人理解浏览器内核可以分为两部分：渲染引擎（RenderEngine）和JS引擎。渲染引擎主要负责页面内容显示内容，JS引擎则是ECMAScript的实现，解释执行JavaScript语言。平时我们所说的内核应该主要指的是渲染引擎，常见分为四种：Trident（IE），Gecko（Firefox），Blink（Chrome)，Webkit（Safari)。内核的不同，最后浏览器渲染效果也不相同。</p>
+<p>说到JS引擎，马上想到就是Google的V8引擎。学过编译原理的人都知道，对于静态语言来说（如Java、C++、C），处理上述这些事情的叫<strong>编译器（Compiler）</strong>，相应地对于JavaScript这样的动态语言则叫<strong>解释器（Interpreter）</strong>。这两者的区别用一句话来概括就是：<strong>编译器是将源代码编译为另外一种代码，而解释器是直接解析并将代码运行结果输出</strong>。</p>
+<p>但是，现在很难去界定说，JavaScript引擎它到底算是个解释器还是个编译器，因为，比如像V8（Chrome的JS引擎），它其实为了提高JS的运行性能，在运行之前会先将JS编译为本地的机器码，然后再去执行机器码（这样速度就快很多）。</p>
+<p>JavaScript运行时又是什么呢。</p>
+<p><strong>Node.js is a JavaScript runtime built on [Chrome’s V8 JavaScript engine]</strong>这是Node的官方解释，不同的浏览器也提供了不同JavaScript的运行时，通过这些Runtime对比来看，我们可以得到一些信息。</p>
+<p>引擎实现的是ECMAScript标准，负责提供解析和编译的机制，即从用JavaScript编写的脚本生成机器可执行操作。运行时环境提供程序在运行时（执行期间）可用的内置库。 因此，如果您要在浏览器中使用Window对象或DOM API，那么这些将包含在浏览器的JS运行时环境中。Node.js运行时包括不同的库，比如Cluster和FileSystem API。 两个运行时都包含内置数据类型和常用工具，如Console对象。某种程度上，运行时是引擎在传统编译语言中链接器对编译器的作用。</p>
+<p>与C和其他编译语言不同，Javascript在一个容器中运行 - 一个读取你的js代码并运行它们的程序。 这个程序必须做两件事</p>
+<ul>
+<li>解析您的代码并将其转换为runnable命令</li>
+<li>为javascript提供一些对象，以便它可以与外部世界进行交互。</li>
+</ul>
+<p>第一部分称为Engine，第二部分是Runtime。</p>
+<table>
+<thead>
+<tr>
+<th>浏览器/RunTime</th>
+<th>内核（渲染引擎）</th>
+<th>JavaScript 引擎</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chrome</td>
+<td>Blink（28~）Webkit（Chrome 27）</td>
+<td>V8</td>
+</tr>
+<tr>
+<td>FireFox</td>
+<td>Gecko</td>
+<td>SpiderMonkey</td>
+</tr>
+<tr>
+<td>Safari</td>
+<td>Webkit</td>
+<td>JavaScriptCore</td>
+</tr>
+<tr>
+<td>Edge</td>
+<td>EdgeHTML</td>
+<td>Chakra(for JavaScript)</td>
+</tr>
+<tr>
+<td>IE</td>
+<td>Trident</td>
+<td>Chakra(for JScript)</td>
+</tr>
+<tr>
+<td>PhantomJS</td>
+<td>Webkit</td>
+<td>JavaScriptCore</td>
+</tr>
+<tr>
+<td>Node.js</td>
+<td>-</td>
+<td>V8</td>
+</tr>
+</tbody>
+</table>
+
+  </section>
+
+  
+  
+
+<section class="post-comments">
+
+    <div class="ds-thread" data-thread-key="2018/12/02/内核、引擎、Runtime/"></div>
+
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"zhangcom"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+    </script> 
+
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
