@@ -199,6 +199,27 @@ classes that you can use:
     <li>
 
       <h2 class="post-list__post-title post-title">
+        <a href="/2019/10/12/Vue-next源码浅析/" title="link to Vue-next源码浅析">Vue-next源码浅析</a>
+      </h2>
+
+      <div class="post-list__meta">
+
+        <time datetime="2019-10-12" class="post-list__meta--date date">2019-10-12</time> 
+      </div>
+
+      <div class="excerpt">
+        
+          <p>目前版本处于<strong>Pre-Alpha</strong>阶段，基本架构功能已完成，主要包括<code>Compiler</code>和<code>Runtime</code>两部分。</p>
+<p>第一眼看上去最显著变化有两个，一个就是代码使用TypeScript编写，另外一个就是<strong>Modular architecture</strong>（模块化架构？暂时这么翻译），内部功能分解为单独的包，隔离复杂性，提高了可维护性。这样的架构划分<code>React</code>早已使用，算是<code>React</code>又领先一步。</p>
+        
+      </div>
+
+      <hr class="post-list__divider" />
+    </li>
+    
+    <li>
+
+      <h2 class="post-list__post-title post-title">
         <a href="/2019/04/14/前端需要了解的Docker/" title="link to 前端需要了解的Docker">前端需要了解的Docker</a>
       </h2>
 
@@ -368,26 +389,6 @@ classes that you can use:
       <div class="excerpt">
         
           <p>Mobx是一个通过透明的函数响应式编程的状态管理库，一提到响应式，首先想到的就是如今响应式编程的代表Vue。两个在响应式的实现都选择了数据劫持的方法，就是将赋值的过程借助函数处理，实现一些额外的操作，比如记录日志，触发回调等等。Vue通过<code>Object.defineProperty</code>，Mobx同样也使用了<code>Object.defineProperty</code>（最新的Mobx5使用了<code>Proxy</code>实现），不同的是Mobx在这里只是用作创建代理对象，真正的响应式实现在<code>observable</code>实例上。</p>
-        
-      </div>
-
-      <hr class="post-list__divider" />
-    </li>
-    
-    <li>
-
-      <h2 class="post-list__post-title post-title">
-        <a href="/2018/08/19/页面设计四大原则/" title="link to 页面设计四大原则">页面设计四大原则</a>
-      </h2>
-
-      <div class="post-list__meta">
-
-        <time datetime="2018-08-19" class="post-list__meta--date date">2018-08-19</time> 
-      </div>
-
-      <div class="excerpt">
-        
-          <p>随着前端的发展，大量的框架不断涌现，现在完成一个页面的开发其实并不难，难就难在这个页面是不是足够完美。作为一个FE，一些简单的设计原则还是需要了解一下，除了完成页面功能开发，页面质量还是得有保证。</p>
         
       </div>
 
